@@ -33,7 +33,7 @@
 
 # text editor 
 .vscode/
-.better-commits.json
+*.json
 
 # build folder 
 build/

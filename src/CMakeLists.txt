@@ -15,6 +15,7 @@ PRIVATE
 )                       
 
 # Link options
+target_link_libraries(${EXENAME} game )
 target_link_libraries(${EXENAME} sfml-graphics sfml-window sfml-system )
 
 # Install executable to the binary directory

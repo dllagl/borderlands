@@ -21,6 +21,8 @@ endif()
 # Find required external libraries
 find_package( SFML COMPONENTS system window graphics REQUIRED)
 
+# Add the library subdirectory
+add_subdirectory(lib)
 
 # Add the src subdirectory
 add_subdirectory(src)
