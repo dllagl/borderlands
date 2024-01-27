@@ -8,11 +8,13 @@ class Player {
 
     float width_, height_;
     sf::RectangleShape playerShape_;
+    sf::Vector2f pos_;
+    float acc_;
 
 
     public : 
         
-        Player(sf::RenderWindow* window);
+        Player(sf::RenderWindow* window, sf::Vector2f pos);
         virtual ~Player(); 
 
         void Update(sf::RenderWindow* window);
@@ -21,6 +23,7 @@ class Player {
     protected :
 
         void InitAttributs();
+        void Move();
 
 
 };

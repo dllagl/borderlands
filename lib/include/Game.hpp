@@ -23,7 +23,7 @@ class Game {
     protected : 
 
         void InitAttributs();
-        void InitPlayer() { mainPlayer_ = new Player(mainWindow_); }
+        void InitPlayer();
         void PollEvents(); 
         void Run(); 
         void Update();
