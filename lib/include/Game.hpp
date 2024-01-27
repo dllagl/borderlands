@@ -7,6 +7,7 @@
 // game lib 
 #include "Player.hpp"
 
+class player;
 
 class Game {
 

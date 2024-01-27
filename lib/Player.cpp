@@ -9,8 +9,6 @@ Player::Player(sf::RenderWindow* window, sf::Vector2f pos)
     : pos_(pos) {
 
     InitAttributs();
-    Update(window);
-    Render(window);
 }
 
 Player::~Player() {
@@ -52,23 +50,21 @@ void Player::Move() {
 
     // move right 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        pos_.x += acc_;
+        playerShape_.move(acc_, 0.f);
     }
 
     // move left 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        pos_.x -= acc_;
+        playerShape_.move(-acc_, 0.f);
     }
 
     // move down 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        pos_.y += acc_;
+        playerShape_.move(0.f, acc_);
     }
 
     // move up 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        pos_.y -= acc_;
+        playerShape_.move(0.f, -acc_);
     }  
-
-    playerShape_.setPosition(pos_);
 }
