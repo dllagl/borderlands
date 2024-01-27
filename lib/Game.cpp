@@ -9,11 +9,13 @@
 Game::Game() {
 
     InitAttributs();
+    InitPlayer();
     Run();
 }
 
 Game::~Game() {
     delete mainWindow_;
+    delete mainPlayer_;
 }
 
 
@@ -26,11 +28,11 @@ Game::~Game() {
 
 void Game::InitAttributs() {
 
-    MAIN_WINDOW_WIDTH_ = 1200;
-    MAIN_WINDOW_HEIGHT_ = 800;    
-    
+    mainWindowWidth_ = 1200;
+    mainWindowHeight_ = 800;    
+
     mainWindow_ = new sf::RenderWindow(
-        sf::VideoMode(MAIN_WINDOW_WIDTH_,MAIN_WINDOW_HEIGHT_), "SMFL works!"
+        sf::VideoMode(mainWindowWidth_,mainWindowHeight_), "SMFL works!"
         );
 }
 
@@ -46,12 +48,15 @@ void Game::Run() {
 
 void Game::Update() {
     PollEvents();
+    mainPlayer_->Update(mainWindow_);
 }
 
 void Game::Render() {
 
     // clear old frame
     mainWindow_->clear();
+
+    mainPlayer_->Render(mainWindow_);
     
     // display updated assets
     mainWindow_->display();

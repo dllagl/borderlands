@@ -4,6 +4,7 @@ set(LIBNAME "game")
 # Add the library "plateformer" and its source files
 add_library( ${LIBNAME}
     Game.cpp
+    Player.cpp
 )
 
 # Include dir 

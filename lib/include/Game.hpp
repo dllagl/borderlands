@@ -1,13 +1,19 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+// external lib 
 #include <SFML/Graphics.hpp>
+
+// game lib 
+#include "Player.hpp"
+
 
 class Game {
 
     sf::RenderWindow *mainWindow_;
     sf::Event event_;
-    uint16_t MAIN_WINDOW_WIDTH_, MAIN_WINDOW_HEIGHT_;
+    uint16_t mainWindowWidth_, mainWindowHeight_;
+    Player* mainPlayer_;
 
     public :
 
@@ -17,6 +23,7 @@ class Game {
     protected : 
 
         void InitAttributs();
+        void InitPlayer() { mainPlayer_ = new Player(mainWindow_); }
         void PollEvents(); 
         void Run(); 
         void Update();
