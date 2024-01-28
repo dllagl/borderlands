@@ -25,13 +25,12 @@ void Player::InitAttributs() {
 
     width_ = 60.f;
     height_ = 40.f;
-    acc_ = 0.5f;
+    acc_ = 0.2f;
+    rotationForce_ = 0.1f;
 
     // set player at the center of the window at launch
-    pos_.x -= width_/2.f;
-    pos_.y -= height_/2.f;
-
     playerShape_ = sf::RectangleShape(sf::Vector2f(width_, height_));
+    playerShape_.setOrigin(width_/2.f, height_/2.f);
     playerShape_.setPosition(pos_);
     playerShape_.setFillColor(sf::Color::Green);
 }
@@ -39,6 +38,7 @@ void Player::InitAttributs() {
 
 void Player::Update(sf::RenderWindow* window) {
     Move();
+    Rotate();
 }
 
 
@@ -67,4 +67,13 @@ void Player::Move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
         playerShape_.move(0.f, -acc_);
     }  
+}
+
+void Player::Rotate() {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        playerShape_.rotate(-rotationForce_);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        playerShape_.rotate(rotationForce_);
+    }
 }

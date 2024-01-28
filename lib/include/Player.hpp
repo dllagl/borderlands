@@ -10,6 +10,7 @@ class Player {
     sf::RectangleShape playerShape_;
     sf::Vector2f pos_;
     float acc_;
+    float rotationForce_;
 
 
     public : 
@@ -24,6 +25,7 @@ class Player {
 
         void InitAttributs();
         void Move();
+        void Rotate();
 
 
 };
