@@ -25,8 +25,8 @@ void Player::InitAttributs() {
 
     width_ = 60.f;
     height_ = 40.f;
-    acc_ = 0.2f;
-    rotationForce_ = 0.1f;
+    acc_ = 0.1f;
+    rotationForce_ = 0.05f;
 
     // set player at the center of the window at launch
     playerShape_ = sf::RectangleShape(sf::Vector2f(width_, height_));
