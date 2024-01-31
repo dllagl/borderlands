@@ -37,3 +37,9 @@
 
 # build folder 
 build/
+
+
+# doxygen 
+html/
+latex/ 
+Doxyfile

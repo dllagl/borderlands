@@ -1,3 +1,12 @@
+/**
+ * @file Game.cpp
+ * @author Anthony DALL'AGNOL (dllagl@gmx.com)
+ * @brief 
+ * @date 2024-01-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "Game.hpp"
 
 
