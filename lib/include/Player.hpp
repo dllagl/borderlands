@@ -15,15 +15,30 @@
 #define PLAYER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
+#include <vector>
 
+#include "Bullet.hpp"
+#include "Weapon.hpp"
+
+class Bullet;
+class Weapon;
 
 class Player {
 
-    float width_, height_;     ///< x and y dimensions
-    sf::RectangleShape shape_; ///< shape of the player (a rectangle here)
-    sf::Vector2f pos_;         ///< x and y coordonate
-    float acc_;                ///< velocity
-    float rotationForce_;      ///< angular velocity
+    // player properties
+    sf::RectangleShape* shape_;          ///< shape of the player (a rectangle here)
+    static const float width_, height_;  ///< x and y dimensions
+    float acc_;                          ///< velocity
+    float rotationForce_;                ///< angular velocity
+    std::vector<Bullet*> bullets_;
+
+    // weapon properties
+    Weapon* smg_;
+    static const sf::Vector2f weaponOriginFromPlayerCenter_;
+
+
+
 
 
     public : 
@@ -38,7 +53,7 @@ class Player {
          * @param window window to be rendered in 
          * @param pos default x and y position's coordonates
          */
-        Player(sf::RenderWindow* window, sf::Vector2f pos);
+        Player(const sf::Vector2f& pos);
 
         /** @brief Destroy the Player object */
         virtual ~Player(); 
@@ -67,13 +82,15 @@ class Player {
     protected :
 
         /** @brief Initialise class attributes */
-        void InitAttributs();
+        void InitAttributs(const sf::Vector2f& pos);
 
         /** @brief Handle movements */
         void Move();
 
         /** @brief Handles rotation */
         void Rotate();
+
+        void Shoot(sf::RenderWindow* window);
 
 
 };

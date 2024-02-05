@@ -5,6 +5,8 @@ set(LIBNAME "game")
 add_library( ${LIBNAME}
     Game.cpp
     Player.cpp
+    Bullet.cpp
+    Weapon.cpp
 )
 
 # Include dir 
