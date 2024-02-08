@@ -67,7 +67,7 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
 
 void Player::Update(sf::RenderWindow* window) {
     Move();
-    Rotate();
+    Rotate(window);
     Shoot(window);
     smg_->Update(shape_->getPosition(), shape_->getRotation());
 
@@ -107,13 +107,11 @@ void Player::Move() {
     }  
 }
 
-void Player::Rotate() {
+void Player::Rotate(sf::RenderWindow* window) {
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        shape_->rotate(-rotationForce_);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        shape_->rotate(rotationForce_);
-    }
+    sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition());
+    float angle = atan2(mousePos.y - shape_->getPosition().y, mousePos.x - shape_->getPosition().x) * 57.296f;
+    shape_->setRotation(angle + 82.f);
 }
 
 void Player::Shoot(sf::RenderWindow* window) {

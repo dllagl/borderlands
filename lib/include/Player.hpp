@@ -88,7 +88,7 @@ class Player {
         void Move();
 
         /** @brief Handles rotation */
-        void Rotate();
+        void Rotate(sf::RenderWindow* window);
 
         void Shoot(sf::RenderWindow* window);
 
