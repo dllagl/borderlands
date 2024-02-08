@@ -18,10 +18,8 @@
 #include <cmath>
 #include <vector>
 
-#include "Bullet.hpp"
 #include "Weapon.hpp"
 
-class Bullet;
 class Weapon;
 
 class Player {
@@ -31,11 +29,11 @@ class Player {
     static const float width_, height_;  ///< x and y dimensions
     float acc_;                          ///< velocity
     float rotationForce_;                ///< angular velocity
-    std::vector<Bullet*> bullets_;
+    sf::Vector2f lookingDirection_;      ///< vector of the player's rotation direction
 
     // weapon properties
-    Weapon* smg_;
-    static const sf::Vector2f weaponOriginFromPlayerCenter_;
+    Weapon* smg_;                            
+    static const sf::Vector2f weaponOriginFromPlayerCenter_; ///< geometrical weapon's origin for rotation with player's body
 
 
 
@@ -84,14 +82,25 @@ class Player {
         /** @brief Initialise class attributes */
         void InitAttributs(const sf::Vector2f& pos);
 
-        /** @brief Handle movements */
+        /**
+         * @brief Handle player's movements
+         * 
+         * Player moves up, left, down, and right with 
+         * ZQSD keys, respectively. 
+         * 
+         */
         void Move();
 
-        /** @brief Handles rotation */
+        /**
+         * @brief Handle player's rotation
+         * 
+         * The player rotates with the mouse's cursor.
+         * This function computes the angle between the player's body 
+         * and the cursor to set the according rotation angle. 
+         * 
+         * @param window 
+         */
         void Rotate(sf::RenderWindow* window);
-
-        void Shoot(sf::RenderWindow* window);
-
 
 };
 

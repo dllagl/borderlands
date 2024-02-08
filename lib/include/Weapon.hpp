@@ -13,12 +13,26 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <cmath>
+#include <chrono>
+
+
+
+#include "Bullet.hpp"
+
+class Bullet;
 
 
 class Weapon {
 
+    // weapon
     sf::RectangleShape shape_;          ///< weapon shape (a rectangle at this point)
     static const float width_, height_; ///< weapon's x and y dimensions
+
+    // bullets
+    std::vector<Bullet*> bullets_;      ///< vector of the fired bullets
+    float bulletVelocity_;              ///< bullet's speed
+    float fireRate_;                    ///< weapon's fire rate (bullet per sec)
 
     public :
 
@@ -44,7 +58,7 @@ class Weapon {
          * @param pos position
          * @param rotation rotation angle 
          */
-        void Update(const sf::Vector2f& pos, const float rotation); 
+        void Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f& aimingDirection); 
 
         /**
          * @brief Render the object
@@ -62,6 +76,13 @@ class Weapon {
          * @param origin initial origin
          */
         void InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin);
+
+        /**
+         * @brief Shoot bullets
+         * 
+         * @param direction vector of the direction bullets will move towards
+         */
+        void Shoot(sf::Vector2f& direction);
 
 };
 

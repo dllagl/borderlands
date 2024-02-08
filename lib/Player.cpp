@@ -35,7 +35,6 @@ Player::Player(const sf::Vector2f& pos) {
 
 Player::~Player() {
 
-    for (Bullet* b : bullets_) { delete b; }
     delete smg_;
     delete shape_;
 }
@@ -68,20 +67,13 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
 void Player::Update(sf::RenderWindow* window) {
     Move();
     Rotate(window);
-    Shoot(window);
-    smg_->Update(shape_->getPosition(), shape_->getRotation());
-
-    if (bullets_.size() != 0)
-        for (Bullet* b : bullets_) { b->Update(); }
+    smg_->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_);
 }
 
 
 void Player::Render(sf::RenderWindow* window) {
     window->draw(*shape_);
     smg_->Render(window);
-
-    if (bullets_.size() != 0)
-        for (Bullet* b : bullets_) { b->Render(window); }
 }
 
 void Player::Move() {
@@ -110,26 +102,8 @@ void Player::Move() {
 void Player::Rotate(sf::RenderWindow* window) {
 
     sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition());
-    float angle = atan2(mousePos.y - shape_->getPosition().y, mousePos.x - shape_->getPosition().x) * 57.296f;
+    lookingDirection_.x = mousePos.x - shape_->getPosition().x;
+    lookingDirection_.y = mousePos.y - shape_->getPosition().y;
+    float angle = atan2(lookingDirection_.y, lookingDirection_.x) * 57.296f;
     shape_->setRotation(angle + 82.f);
-}
-
-void Player::Shoot(sf::RenderWindow* window) {
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-
-        // mouse position relative to the window
-        sf::Vector2i mousePosWindow  = sf::Vector2i(sf::Mouse::getPosition(*window));
-
-        // conversion to sf::view coordonates
-        sf::Vector2f mousePosView = window->mapPixelToCoords(mousePosWindow);
-
-        // aiming direction
-        sf::Vector2f aimDir = mousePosView - shape_->getPosition();
-        const sf::Vector2f aimDirNorm = aimDir / static_cast<float>(sqrt(pow(aimDir.x,2) + pow(aimDir.y,2)));
-
-        // spawn new bullet
-        bullets_.push_back(new Bullet(shape_->getPosition(), aimDirNorm));
-            
-    }
 }

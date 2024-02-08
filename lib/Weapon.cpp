@@ -27,6 +27,7 @@ Weapon::Weapon(const sf::Vector2f& pos, const sf::Vector2f& origin) {
 }
 
 Weapon::~Weapon() {
+    for (Bullet* b : bullets_) { delete b; }
 }
 
 
@@ -47,15 +48,55 @@ void Weapon::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin) 
     shape_.setOrigin(-origin);
     shape_.setPosition(pos);
     shape_.setFillColor(sf::Color::Red);
+
+    // bullets
+    fireRate_ = 5.f;
 }
 
-void Weapon::Update(const sf::Vector2f& pos, const float rotation) {
+void Weapon::Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f& aimingDirection) {
 
     // movements and rotations are updated following main player's body's
     shape_.setPosition(pos);
     shape_.setRotation(rotation);
+
+    // weapon
+    Shoot(aimingDirection);
+
+    // bullets
+    if (bullets_.size() != 0)
+        for (Bullet* b : bullets_) { b->Update(); }
 }
 
 void Weapon::Render(sf::RenderWindow* window) {
+
+    // weapon 
     window->draw(shape_);
+
+    // bullets
+    if (bullets_.size() != 0)
+        for (Bullet* b : bullets_) { b->Render(window); }
+}
+
+void Weapon::Shoot(sf::Vector2f& direction) {
+
+    static auto lastShotFired = std::chrono::steady_clock::now();
+
+    auto currentTime = std::chrono::steady_clock::now();
+
+    // compute time since shot was fired 
+    auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(
+        currentTime - lastShotFired
+        ).count() / 1000.0;
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) 
+        && (elapsedTime >= 1/fireRate_) ) {
+
+        // normalize aiming direction vector 
+        direction = direction / static_cast<float>(sqrt(pow(direction.x,2) + pow(direction.y,2)));
+
+        // spawn bullet and move it 
+        bullets_.push_back(new Bullet(shape_.getPosition(),direction));
+
+        lastShotFired = currentTime;
+    }
 }
