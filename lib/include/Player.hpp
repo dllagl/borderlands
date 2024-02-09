@@ -16,7 +16,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
-#include <vector>
 
 #include "Weapon.hpp"
 

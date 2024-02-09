@@ -21,7 +21,6 @@ class Bullet {
     sf::CircleShape shape_;
     sf::Vector2f initialPos_;
     sf::Vector2f dir_;
-    float velocity_;
 
     public : 
 
@@ -30,7 +29,7 @@ class Bullet {
         ////////////////////////////////////
 
         Bullet() {};
-        Bullet(sf::Vector2f pos,sf::Vector2f direction);
+        Bullet(const sf::Vector2f& pos, const sf::Vector2f& direction);
         virtual ~Bullet();
 
 
@@ -38,14 +37,14 @@ class Bullet {
         // methods 
         ////////////////////////////////////
 
-        void Update();
+        void Update(const float velocity);
         void Render(sf::RenderWindow* window);
 
 
     protected : 
 
         void InitAttributs();
-        void Move();
+        void Move(const float velocity);
 
 };
 

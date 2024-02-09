@@ -16,8 +16,6 @@
 #include <cmath>
 #include <chrono>
 
-
-
 #include "Bullet.hpp"
 
 class Bullet;

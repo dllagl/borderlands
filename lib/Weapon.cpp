@@ -51,6 +51,7 @@ void Weapon::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin) 
 
     // bullets
     fireRate_ = 5.f;
+    bulletVelocity_ = 0.1f;
 }
 
 void Weapon::Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f& aimingDirection) {
@@ -64,7 +65,7 @@ void Weapon::Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f&
 
     // bullets
     if (bullets_.size() != 0)
-        for (Bullet* b : bullets_) { b->Update(); }
+        for (Bullet* b : bullets_) { b->Update(bulletVelocity_); }
 }
 
 void Weapon::Render(sf::RenderWindow* window) {
@@ -89,13 +90,13 @@ void Weapon::Shoot(sf::Vector2f& direction) {
         ).count() / 1000.0;
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) 
-        && (elapsedTime >= 1/fireRate_) ) {
+        && (elapsedTime >= 1.f/fireRate_) ) {
 
         // normalize aiming direction vector 
-        direction = direction / static_cast<float>(sqrt(pow(direction.x,2) + pow(direction.y,2)));
+        direction /= static_cast<float>(sqrt(pow(direction.x,2) + pow(direction.y,2)));
 
         // spawn bullet and move it 
-        bullets_.push_back(new Bullet(shape_.getPosition(),direction));
+        bullets_.push_back(new Bullet(shape_.getPosition(), direction));
 
         lastShotFired = currentTime;
     }

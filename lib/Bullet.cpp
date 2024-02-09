@@ -14,7 +14,7 @@
 // ctors / dtor 
 ////////////////////////////////////
 
-Bullet::Bullet(sf::Vector2f pos, sf::Vector2f direction) 
+Bullet::Bullet(const sf::Vector2f& pos, const sf::Vector2f& direction) 
 : initialPos_(pos), dir_(direction) {
     InitAttributs();
 }
@@ -32,15 +32,14 @@ void Bullet::InitAttributs() {
 
     radius_ = 2.f;
     color_  = sf::Color::White;
-    velocity_ = 0.1;
 
     shape_ = sf::CircleShape(radius_);
     shape_.setFillColor(color_);
     shape_.setPosition(initialPos_);
 }
 
-void Bullet::Update() {
-    Move();
+void Bullet::Update(const float velocity) {
+    Move(velocity);
 }
 
 
@@ -48,6 +47,6 @@ void Bullet::Render(sf::RenderWindow* window) {
     window->draw(shape_);
 }
 
-void Bullet::Move() {
-    shape_.move(velocity_ * dir_);
+void Bullet::Move(const float velocity) {
+    shape_.move(velocity * dir_);
 }
