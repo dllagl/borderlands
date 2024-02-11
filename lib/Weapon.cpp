@@ -22,8 +22,8 @@ const float Weapon::height_ = 25.f;
 // ctors / dtor 
 ////////////////////////////////////
 
-Weapon::Weapon(const sf::Vector2f& pos, const sf::Vector2f& origin) {
-    InitAttributs(pos, origin);
+Weapon::Weapon(const sf::Vector2f& pos) {
+    InitAttributs(pos);
 }
 
 Weapon::~Weapon() {
@@ -36,7 +36,7 @@ Weapon::~Weapon() {
 // methods
 ////////////////////////////////////
 
-void Weapon::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin) {
+void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
     shape_ = sf::RectangleShape();
     shape_.setSize(sf::Vector2f(width_,height_));
@@ -45,7 +45,8 @@ void Weapon::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin) 
      * The origin of the weapon is set to the geometrical center 
      * of the player in order to rotate around its axis.
      */
-    shape_.setOrigin(-origin);
+    offsetOriginFromPlayerCenter_ = sf::Vector2f(-8.f, 30.f);
+    shape_.setOrigin(offsetOriginFromPlayerCenter_);
     shape_.setPosition(pos);
     shape_.setFillColor(sf::Color::Red);
 

@@ -26,6 +26,7 @@ class Weapon {
     // weapon
     sf::RectangleShape shape_;          ///< weapon shape (a rectangle at this point)
     static const float width_, height_; ///< weapon's x and y dimensions
+    sf::Vector2f offsetOriginFromPlayerCenter_;
 
     // bullets
     std::vector<Bullet*> bullets_;      ///< vector of the fired bullets
@@ -43,7 +44,7 @@ class Weapon {
          * @param pos position of the object 
          * @param origin origin of the object's shape (relative to its 0,0 coordonates)
          */
-        Weapon(const sf::Vector2f& pos, const sf::Vector2f& origin);
+        Weapon(const sf::Vector2f& pos);
 
         /** @brief Destroy the Weapon object */
         virtual ~Weapon();
@@ -73,7 +74,7 @@ class Weapon {
          * @param pos initial position
          * @param origin initial origin
          */
-        void InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& origin);
+        void InitAttributs(const sf::Vector2f& pos);
 
         /**
          * @brief Shoot bullets

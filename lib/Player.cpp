@@ -19,9 +19,6 @@
 const float Player::width_  = 60.f;
 const float Player::height_ = 40.f;
 
-// weapon properties
-const sf::Vector2f Player::weaponOriginFromPlayerCenter_ = sf::Vector2f(8.f, -30.f);
-
 
 
 ////////////////////////////////////
@@ -60,7 +57,7 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     shape_->setFillColor(sf::Color::Green);
 
     // init weapon
-    smg_ = new Weapon(shape_->getPosition(), weaponOriginFromPlayerCenter_);
+    smg_ = new Weapon(shape_->getPosition());
 }
 
 

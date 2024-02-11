@@ -32,7 +32,6 @@ class Player {
 
     // weapon properties
     Weapon* smg_;                            
-    static const sf::Vector2f weaponOriginFromPlayerCenter_; ///< geometrical weapon's origin for rotation with player's body
 
 
 
