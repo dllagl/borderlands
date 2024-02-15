@@ -46,9 +46,7 @@ void Game::InitAttributs() {
 }
 
 void Game::InitPlayer() {
-    mainPlayer_ = new Player(
-        mainWindow_, sf::Vector2f(mainWindowWidth_/2.f, mainWindowHeight_/2.f)
-    );
+    mainPlayer_ = new Player(sf::Vector2f(mainWindowWidth_/2.f, mainWindowHeight_/2.f));
 }
 
 void Game::Run() {
