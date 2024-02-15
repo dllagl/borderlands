@@ -14,9 +14,14 @@
 // ctors / dtor 
 ////////////////////////////////////
 
-Bullet::Bullet(const sf::Vector2f& pos, const sf::Vector2f& direction) 
-: initialPos_(pos), dir_(direction) {
-    InitAttributs();
+Bullet::Bullet(
+    const sf::Vector2f& pos,
+    const sf::Vector2f& origin,
+    const float rotation,
+    const sf::Vector2f& direction,
+    const float weaponWidth) 
+    : dir_(direction) {
+    InitAttributs(pos, origin, rotation, weaponWidth);
 }
 
 Bullet::~Bullet() {
@@ -28,14 +33,27 @@ Bullet::~Bullet() {
 // methods
 ////////////////////////////////////
 
-void Bullet::InitAttributs() {
+void Bullet::InitAttributs(
+    const sf::Vector2f& pos,
+    const sf::Vector2f& origin,
+    const float rotation,
+    const float weaponWidth) {
 
     radius_ = 2.f;
     color_  = sf::Color::White;
 
+    /*
+    The bullet origin is based on the weapon's offset from the player's body 
+    and and additional offset for it to spawn at the center of the weapon, like 
+    a real one. 
+    */
+    offsetOriginFromWeapon_ = sf::Vector2f(-( weaponWidth - shape_.getRadius() )/2.f, 0.f);
+
     shape_ = sf::CircleShape(radius_);
     shape_.setFillColor(color_);
-    shape_.setPosition(initialPos_);
+    shape_.setOrigin(origin + offsetOriginFromWeapon_);
+    shape_.setPosition(pos);
+    shape_.setRotation(rotation);
 }
 
 void Bullet::Update(const float velocity) {

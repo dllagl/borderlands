@@ -97,7 +97,15 @@ void Weapon::Shoot(sf::Vector2f& direction) {
         direction /= static_cast<float>(sqrt(pow(direction.x,2) + pow(direction.y,2)));
 
         // spawn bullet and move it 
-        bullets_.push_back(new Bullet(shape_.getPosition(), direction));
+        bullets_.push_back(
+            new Bullet(
+                shape_.getPosition(),
+                offsetOriginFromPlayerCenter_,
+                shape_.getRotation(),
+                direction,
+                width_
+                )
+            );
 
         lastShotFired = currentTime;
     }

@@ -38,10 +38,6 @@ class Player {
 
 
     public : 
-        
-        ////////////////////////////////////
-        // ctors / dtor 
-        ////////////////////////////////////
 
         /**
          * @brief Construct a new Player object
@@ -54,11 +50,6 @@ class Player {
         /** @brief Destroy the Player object */
         virtual ~Player(); 
 
-
-
-        ////////////////////////////////////
-        // methods 
-        ////////////////////////////////////
 
         /**
          * @brief Update every states (position, rotation, ..)
