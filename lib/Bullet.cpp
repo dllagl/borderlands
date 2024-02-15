@@ -56,8 +56,8 @@ void Bullet::InitAttributs(
     shape_.setRotation(rotation);
 }
 
-void Bullet::Update(const float velocity) {
-    Move(velocity);
+void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame) {
+    Move(velocity, timeSinceLastFrame);
 }
 
 
@@ -65,6 +65,6 @@ void Bullet::Render(sf::RenderWindow* window) {
     window->draw(shape_);
 }
 
-void Bullet::Move(const float velocity) {
-    shape_.move(velocity * dir_);
+void Bullet::Move(const float velocity, const sf::Time& timeSinceLastFrame) {
+    shape_.move(velocity * dir_ * timeSinceLastFrame.asSeconds());
 }

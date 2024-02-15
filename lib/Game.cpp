@@ -43,6 +43,8 @@ void Game::InitAttributs() {
     mainWindow_ = new sf::RenderWindow(
         sf::VideoMode(mainWindowWidth_,mainWindowHeight_), "SMFL works!"
         );
+
+    mainWindow_->setFramerateLimit(60);
 }
 
 void Game::InitPlayer() {
@@ -51,17 +53,23 @@ void Game::InitPlayer() {
 
 void Game::Run() {
 
+    sf::Clock clock; // starts time clock 
+    sf::Time timeElapsedSinceLastFrame;
+
     while (mainWindow_->isOpen()) {
 
-        Update();
+        // see https://www.sfml-dev.org/tutorials/2.6/system-time.php for time management
+        timeElapsedSinceLastFrame = clock.restart();
+
+        Update(timeElapsedSinceLastFrame);
         Render();
 
     }
 }
 
-void Game::Update() {
+void Game::Update(const sf::Time& timeSinceLastFrame) {
     PollEvents();
-    mainPlayer_->Update(mainWindow_);
+    mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
 }
 
 void Game::Render() {

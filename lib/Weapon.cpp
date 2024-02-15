@@ -52,10 +52,15 @@ void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
     // bullets
     fireRate_ = 5.f;
-    bulletVelocity_ = 0.1f;
+    bulletVelocity_ = 500.f;
 }
 
-void Weapon::Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f& aimingDirection) {
+void Weapon::Update(
+    const sf::Vector2f& pos,
+    const float rotation,
+    sf::Vector2f& aimingDirection,
+    const sf::Time& timeSinceLastFrame
+    ) {
 
     // movements and rotations are updated following main player's body's
     shape_.setPosition(pos);
@@ -66,7 +71,7 @@ void Weapon::Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f&
 
     // bullets
     if (bullets_.size() != 0)
-        for (Bullet* b : bullets_) { b->Update(bulletVelocity_); }
+        for (Bullet* b : bullets_) { b->Update(bulletVelocity_, timeSinceLastFrame); }
 }
 
 void Weapon::Render(sf::RenderWindow* window) {

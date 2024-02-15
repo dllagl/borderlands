@@ -55,8 +55,12 @@ class Game {
         /** @brief Run the game i.e. update and render assets */
         void Run(); 
 
-        /** @brief Update game assets */
-        void Update();
+        /** 
+         * @brief Update game assets 
+         * 
+         * @param timeSinceLastFrame time since the last window frame 
+         */
+        void Update(const sf::Time& timeSinceLastFrame);
 
         /** @brief Render game assets */
         void Render();

@@ -51,8 +51,9 @@ class Bullet {
          * @brief Update bullet's properties
          * 
          * @param velocity speed at which it will move 
+         * @param timeSinceLastFrame time since the last window frame
          */
-        void Update(const float velocity);
+        void Update(const float velocity, const sf::Time& timeSinceLastFrame);
 
         /**
          * @brief Render the object
@@ -83,8 +84,9 @@ class Bullet {
          * @brief Handle bullet's movements
          * 
          * @param velocity speed at which it will move
+         * @param timeSinceLastFrame time since the last window frame
          */
-        void Move(const float velocity);
+        void Move(const float velocity, const sf::Time& timeSinceLastFrame);
 
 };
 

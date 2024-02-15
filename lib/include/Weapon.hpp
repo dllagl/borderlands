@@ -55,9 +55,16 @@ class Weapon {
          * @brief Update weapon's properties
          * 
          * @param pos position
-         * @param rotation rotation angle 
+         * @param rotation rotation angle
+         * @param aimingDirection eye direction of the player
+         * @param timeSinceLastFrame time since the last window frame 
          */
-        void Update(const sf::Vector2f& pos, const float rotation, sf::Vector2f& aimingDirection); 
+        void Update(
+            const sf::Vector2f& pos,
+            const float rotation,
+            sf::Vector2f& aimingDirection,
+            const sf::Time& timeSinceLastFrame
+            ); 
 
         /**
          * @brief Render the object

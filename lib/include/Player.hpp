@@ -55,8 +55,9 @@ class Player {
          * @brief Update every states (position, rotation, ..)
          * 
          * @param window window to be rendered in 
+         * @param timeSinceLastFrame time since the last window frame
          */
-        void Update(sf::RenderWindow* window);
+        void Update(sf::RenderWindow* window, const sf::Time& timeSinceLastFrame);
 
         /**
          * @brief Render the player 
@@ -77,8 +78,9 @@ class Player {
          * Player moves up, left, down, and right with 
          * ZQSD keys, respectively. 
          * 
+         * @param timeSinceLastFrame time since the last window frame
          */
-        void Move();
+        void Move(const sf::Time& timeSinceLastFrame);
 
         /**
          * @brief Handle player's rotation

@@ -46,7 +46,7 @@ Player::~Player() {
 void Player::InitAttributs(const sf::Vector2f& pos) {
 
     // player initial properties
-    acc_ = 0.1f;
+    acc_ = 500.f;
     rotationForce_ = 0.05f;
 
     // set player at the center of the window at launch
@@ -61,10 +61,10 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
 }
 
 
-void Player::Update(sf::RenderWindow* window) {
-    Move();
+void Player::Update(sf::RenderWindow* window, const sf::Time& timeSinceLastFrame) {
+    Move(timeSinceLastFrame);
     Rotate(window);
-    smg_->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_);
+    smg_->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_, timeSinceLastFrame);
 }
 
 
@@ -73,26 +73,26 @@ void Player::Render(sf::RenderWindow* window) {
     smg_->Render(window);
 }
 
-void Player::Move() {
+void Player::Move(const sf::Time& timeSinceLastFrame) {
 
     // move right 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        shape_->move(acc_, 0.f);
+        shape_->move(acc_ * timeSinceLastFrame.asSeconds(), 0.f);
     }
 
     // move left 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        shape_->move(-acc_, 0.f);
+        shape_->move(-acc_ * timeSinceLastFrame.asSeconds(), 0.f);
     }
 
     // move down 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        shape_->move(0.f, acc_);
+        shape_->move(0.f, acc_ * timeSinceLastFrame.asSeconds());
     }
 
     // move up 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-        shape_->move(0.f, -acc_);
+        shape_->move(0.f, -acc_ * timeSinceLastFrame.asSeconds());
     }  
 }
 
