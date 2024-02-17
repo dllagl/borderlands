@@ -102,5 +102,5 @@ void Player::Rotate(sf::RenderWindow* window) {
     lookingDirection_.x = mousePos.x - shape_->getPosition().x;
     lookingDirection_.y = mousePos.y - shape_->getPosition().y;
     float angle = atan2(lookingDirection_.y, lookingDirection_.x) * 57.296f;
-    shape_->setRotation(angle + 82.f);
+    shape_->setRotation(angle + 90.f);
 }
