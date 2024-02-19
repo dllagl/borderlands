@@ -12,6 +12,8 @@
 #define BULLET_HPP
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
+#include <iostream>
 
 
 class Bullet {
@@ -21,6 +23,8 @@ class Bullet {
     sf::CircleShape shape_;               ///< Bullet main shape 
     sf::Vector2f dir_;                    ///< To store the direction of the bullet 
     sf::Vector2f offsetOriginFromWeapon_; ///< offset of bullet's position from weapon
+    sf::Vector2f initialPosition_;        ///< spawning bullet's (x,y)  coordonate 
+    bool hasReachedMaxDistance_;          ///< true when bullet has moved to its max distance
 
     public : 
 
@@ -31,14 +35,14 @@ class Bullet {
          * @brief Construct a new Bullet object
          * 
          * @param pos spawning position (Player's body's geometrical center) 
-         * @param origin offset position from spawning position
+         * @param weaponOffsetFromPlayer offset position from spawning position
          * @param rotation player's rotation angle  
          * @param direction direction of the bullet to be fired 
          * @param weaponWidth weapon's x dimension to spawn bullet at its center
          */
         Bullet(
             const sf::Vector2f& pos,
-            const sf::Vector2f& origin,
+            const sf::Vector2f& weaponOffsetFromPlayer,
             const float rotation,
             const sf::Vector2f& direction,
             const float weaponWidth
@@ -52,8 +56,9 @@ class Bullet {
          * 
          * @param velocity speed at which it will move 
          * @param timeSinceLastFrame time since the last window frame
+         * @param maxDistance bullet's maximum flying distance 
          */
-        void Update(const float velocity, const sf::Time& timeSinceLastFrame);
+        void Update(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance);
 
         /**
          * @brief Render the object
@@ -62,20 +67,21 @@ class Bullet {
          */
         void Render(sf::RenderWindow* window);
 
+        /** @brief return true if bullet has traveled its maximum distance */
+        inline const bool getHasReachedMaxDistance() const { return hasReachedMaxDistance_; }
+
 
     protected : 
 
         /**
          * @brief Initialise bullet's attributs
          * 
-         * @param pos spawning position (Player's body's geometrical center)
-         * @param origin offset position from spawning position
+         * @param weaponOffsetFromPlayer offset position from spawning position
          * @param rotation player's rotation angle  
          * @param weaponWidth weapon's x dimension to spawn bullet at its center
          */
         void InitAttributs(
-            const sf::Vector2f& pos,
-            const sf::Vector2f& origin,
+            const sf::Vector2f& weaponOffsetFromPlayer,
             const float rotation,
             const float weaponWidth
             );
@@ -85,8 +91,9 @@ class Bullet {
          * 
          * @param velocity speed at which it will move
          * @param timeSinceLastFrame time since the last window frame
+         * @param maxDistance bullet's maximum flying distance 
          */
-        void Move(const float velocity, const sf::Time& timeSinceLastFrame);
+        void Move(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance);
 
 };
 

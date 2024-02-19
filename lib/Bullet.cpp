@@ -16,12 +16,12 @@
 
 Bullet::Bullet(
     const sf::Vector2f& pos,
-    const sf::Vector2f& origin,
+    const sf::Vector2f& weaponOffsetFromPlayer,
     const float rotation,
     const sf::Vector2f& direction,
     const float weaponWidth) 
-    : dir_(direction) {
-    InitAttributs(pos, origin, rotation, weaponWidth);
+    : dir_(direction), initialPosition_(pos) {
+    InitAttributs(weaponOffsetFromPlayer, rotation, weaponWidth);
 }
 
 Bullet::~Bullet() {
@@ -34,13 +34,13 @@ Bullet::~Bullet() {
 ////////////////////////////////////
 
 void Bullet::InitAttributs(
-    const sf::Vector2f& pos,
-    const sf::Vector2f& origin,
+    const sf::Vector2f& weaponOffsetFromPlayer,
     const float rotation,
     const float weaponWidth) {
 
     radius_ = 2.f;
     color_  = sf::Color::White;
+    hasReachedMaxDistance_ = false;
 
     /*
     The bullet origin is based on the weapon's offset from the player's body 
@@ -51,13 +51,13 @@ void Bullet::InitAttributs(
 
     shape_ = sf::CircleShape(radius_);
     shape_.setFillColor(color_);
-    shape_.setOrigin(origin + offsetOriginFromWeapon_);
-    shape_.setPosition(pos);
+    shape_.setOrigin(weaponOffsetFromPlayer + offsetOriginFromWeapon_);
+    shape_.setPosition(initialPosition_);
     shape_.setRotation(rotation);
 }
 
-void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame) {
-    Move(velocity, timeSinceLastFrame);
+void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance) {
+    Move(velocity, timeSinceLastFrame, maxDistance);
 }
 
 
@@ -65,6 +65,15 @@ void Bullet::Render(sf::RenderWindow* window) {
     window->draw(shape_);
 }
 
-void Bullet::Move(const float velocity, const sf::Time& timeSinceLastFrame) {
-    shape_.move(velocity * dir_ * timeSinceLastFrame.asSeconds());
+void Bullet::Move(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance) {
+
+    sf::Vector2f currentPosition = shape_.getPosition() - initialPosition_;
+    float currentPositionNorm = static_cast<float>(sqrt(pow(currentPosition.x,2) + pow(currentPosition.y,2)));
+    
+    if (currentPositionNorm <= maxDistance) {
+        shape_.move(velocity * dir_ * timeSinceLastFrame.asSeconds());
+    } else {
+        hasReachedMaxDistance_ = true;
+    }
+            
 }

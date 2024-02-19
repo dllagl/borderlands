@@ -52,6 +52,7 @@ void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
     // bullets
     fireRate_ = 5.f;
+    fireRange_ = 200.f;
     bulletVelocity_ = 500.f;
 }
 
@@ -70,8 +71,19 @@ void Weapon::Update(
     Shoot(aimingDirection);
 
     // bullets
-    if (bullets_.size() != 0)
-        for (Bullet* b : bullets_) { b->Update(bulletVelocity_, timeSinceLastFrame); }
+    if (!bullets_.empty()) {
+        std::vector<Bullet*>::iterator it = bullets_.begin();
+        while (it != bullets_.end()) {
+            (*it)->Update(bulletVelocity_, timeSinceLastFrame, fireRange_);
+
+            if ((*it)->getHasReachedMaxDistance()) {
+                delete *it;              // delete Bullet object 
+                it = bullets_.erase(it); // empty vector case and resize it
+            } else {
+                ++it;
+            }
+        }
+    }  
 }
 
 void Weapon::Render(sf::RenderWindow* window) {
@@ -80,7 +92,7 @@ void Weapon::Render(sf::RenderWindow* window) {
     window->draw(shape_);
 
     // bullets
-    if (bullets_.size() != 0)
+    if (!bullets_.empty())
         for (Bullet* b : bullets_) { b->Render(window); }
 }
 

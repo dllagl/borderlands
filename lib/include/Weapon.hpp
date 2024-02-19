@@ -24,14 +24,15 @@ class Bullet;
 class Weapon {
 
     // weapon
-    sf::RectangleShape shape_;          ///< weapon shape (a rectangle at this point)
-    static const float width_, height_; ///< weapon's x and y dimensions
-    sf::Vector2f offsetOriginFromPlayerCenter_;
+    sf::RectangleShape shape_;                  ///< weapon shape (a rectangle at this point)
+    static const float width_, height_;         ///< weapon's x and y dimensions
+    sf::Vector2f offsetOriginFromPlayerCenter_; ///< offset position coordonate from player's body
 
     // bullets
-    std::vector<Bullet*> bullets_;      ///< vector of the fired bullets
-    float bulletVelocity_;              ///< bullet's speed
-    float fireRate_;                    ///< weapon's fire rate (bullet per sec)
+    std::vector<Bullet*> bullets_;  ///< vector of the fired bullets
+    float bulletVelocity_;          ///< bullet's speed
+    float fireRate_;                ///< weapon's fire rate (bullet per sec)
+    float fireRange_;               ///< bullet's max distance of flying
 
     public :
 
@@ -42,7 +43,6 @@ class Weapon {
          * @brief Construct a new Weapon object
          * 
          * @param pos position of the object 
-         * @param origin origin of the object's shape (relative to its 0,0 coordonates)
          */
         Weapon(const sf::Vector2f& pos);
 
@@ -79,7 +79,6 @@ class Weapon {
          * @brief Initialise weapon's properties
          * 
          * @param pos initial position
-         * @param origin initial origin
          */
         void InitAttributs(const sf::Vector2f& pos);
 
