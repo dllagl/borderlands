@@ -21,14 +21,14 @@ class Weapon;
 class Player {
 
     // player properties
-    sf::RectangleShape* shape_;          ///< shape of the player (a rectangle here)
-    static const float width_, height_;  ///< x and y dimensions
-    float acc_;                          ///< velocity
-    float rotationForce_;                ///< angular velocity
-    sf::Vector2f lookingDirection_;      ///< vector of the player's rotation direction
+    std::unique_ptr<sf::RectangleShape> shape_;  ///< shape of the player (a rectangle here)
+    static const float width_, height_;          ///< x and y dimensions
+    float acc_;                                  ///< velocity
+    float rotationForce_;                        ///< angular velocity
+    sf::Vector2f lookingDirection_;              ///< vector of the player's rotation direction
 
     // weapon properties
-    Weapon* smg_;                            
+    std::unique_ptr<Weapon> smg_; ///< equiped weapon                      
 
 
 
@@ -54,14 +54,14 @@ class Player {
          * @param window window to be rendered in 
          * @param timeSinceLastFrame time since the last window frame
          */
-        void Update(sf::RenderWindow* window, const sf::Time& timeSinceLastFrame);
+        void Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::Time& timeSinceLastFrame);
 
         /**
          * @brief Render the player 
 
          * @param window window to be rendered in
          */
-        void Render(sf::RenderWindow* window);
+        void Render(const std::unique_ptr<sf::RenderWindow>& window);
 
 
     protected :
@@ -88,7 +88,7 @@ class Player {
          * 
          * @param window 
          */
-        void Rotate(sf::RenderWindow* window);
+        void Rotate(const std::unique_ptr<sf::RenderWindow>& window);
 
 };
 

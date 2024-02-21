@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <chrono>
+#include <memory>
 
 #include "Bullet.hpp"
 
@@ -27,10 +28,10 @@ class Weapon {
     sf::Vector2f offsetOriginFromPlayerCenter_; ///< offset position coordonate from player's body
 
     // bullets
-    std::vector<Bullet*> bullets_;  ///< vector of the fired bullets
-    float bulletVelocity_;          ///< bullet's speed
-    float fireRate_;                ///< weapon's fire rate (bullet per sec)
-    float fireRange_;               ///< bullet's max distance of flying
+    std::vector<std::unique_ptr<Bullet>> bullets_;  ///< vector of the fired bullets
+    float bulletVelocity_;  ///< bullet's speed
+    float fireRate_;        ///< weapon's fire rate (bullet per sec)
+    float fireRange_;       ///< bullet's max distance of flying
 
     public :
 
@@ -69,7 +70,7 @@ class Weapon {
          * 
          * @param window window to be rendered in
          */
-        void Render(sf::RenderWindow* window); 
+        void Render(const std::unique_ptr<sf::RenderWindow>& window); 
 
     protected : 
 

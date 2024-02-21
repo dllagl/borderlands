@@ -64,7 +64,7 @@ class Bullet {
          * 
          * @param window window to be rendered in 
          */
-        void Render(sf::RenderWindow* window);
+        void Render(const std::unique_ptr<sf::RenderWindow>& window);
 
         /** @brief return true if bullet has traveled its maximum distance */
         inline const bool getHasReachedMaxDistance() const { return hasReachedMaxDistance_; }

@@ -27,7 +27,6 @@ Weapon::Weapon(const sf::Vector2f& pos) {
 }
 
 Weapon::~Weapon() {
-    for (Bullet* b : bullets_) { delete b; }
 }
 
 
@@ -72,12 +71,11 @@ void Weapon::Update(
 
     // bullets
     if (!bullets_.empty()) {
-        std::vector<Bullet*>::iterator it = bullets_.begin();
+        std::vector<std::unique_ptr<Bullet>>::iterator it = bullets_.begin();
         while (it != bullets_.end()) {
             (*it)->Update(bulletVelocity_, timeSinceLastFrame, fireRange_);
 
             if ((*it)->getHasReachedMaxDistance()) {
-                delete *it;              // delete Bullet object 
                 it = bullets_.erase(it); // empty vector case and resize it
             } else {
                 ++it;
@@ -86,14 +84,14 @@ void Weapon::Update(
     }  
 }
 
-void Weapon::Render(sf::RenderWindow* window) {
+void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) {
 
     // weapon 
     window->draw(shape_);
 
     // bullets
     if (!bullets_.empty())
-        for (Bullet* b : bullets_) { b->Render(window); }
+        for (const auto& b : bullets_) { b->Render(window); }
 }
 
 void Weapon::Shoot(sf::Vector2f& direction) {
@@ -115,7 +113,7 @@ void Weapon::Shoot(sf::Vector2f& direction) {
 
         // spawn bullet and move it 
         bullets_.push_back(
-            new Bullet(
+            std::make_unique<Bullet>(
                 shape_.getPosition(),
                 offsetOriginFromPlayerCenter_,
                 shape_.getRotation(),

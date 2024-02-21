@@ -31,9 +31,6 @@ Player::Player(const sf::Vector2f& pos) {
 }
 
 Player::~Player() {
-
-    delete smg_;
-    delete shape_;
 }
 
 
@@ -50,25 +47,25 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     rotationForce_ = 0.05f;
 
     // set player at the center of the window at launch
-    shape_ = new sf::RectangleShape();
+    shape_ = std::make_unique<sf::RectangleShape>();
     shape_->setSize(sf::Vector2f(width_,height_));
     shape_->setOrigin(shape_->getSize() / 2.f);
     shape_->setPosition(pos);
     shape_->setFillColor(sf::Color::Green);
 
     // init weapon
-    smg_ = new Weapon(shape_->getPosition());
+    smg_ = std::make_unique<Weapon>(shape_->getPosition());
 }
 
 
-void Player::Update(sf::RenderWindow* window, const sf::Time& timeSinceLastFrame) {
+void Player::Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::Time& timeSinceLastFrame) {
     Move(timeSinceLastFrame);
     Rotate(window);
     smg_->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_, timeSinceLastFrame);
 }
 
 
-void Player::Render(sf::RenderWindow* window) {
+void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) {
     window->draw(*shape_);
     smg_->Render(window);
 }
@@ -96,7 +93,7 @@ void Player::Move(const sf::Time& timeSinceLastFrame) {
     }  
 }
 
-void Player::Rotate(sf::RenderWindow* window) {
+void Player::Rotate(const std::unique_ptr<sf::RenderWindow>& window) {
 
     sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition());
     lookingDirection_.x = mousePos.x - shape_->getPosition().x;

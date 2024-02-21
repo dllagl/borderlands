@@ -23,8 +23,6 @@ Game::Game() {
 }
 
 Game::~Game() {
-    delete mainWindow_;
-    delete mainPlayer_;
 }
 
 
@@ -40,15 +38,17 @@ void Game::InitAttributs() {
     mainWindowWidth_ = 1200;
     mainWindowHeight_ = 800;    
 
-    mainWindow_ = new sf::RenderWindow(
+    mainWindow_ = std::make_unique<sf::RenderWindow>(
         sf::VideoMode(mainWindowWidth_,mainWindowHeight_), "SMFL works!"
-        );
+    );
 
     mainWindow_->setFramerateLimit(60);
 }
 
 void Game::InitPlayer() {
-    mainPlayer_ = new Player(sf::Vector2f(mainWindowWidth_/2.f, mainWindowHeight_/2.f));
+    mainPlayer_ = std::make_unique<Player>(
+        sf::Vector2f(mainWindowWidth_/2.f, mainWindowHeight_/2.f)
+    );
 }
 
 void Game::Run() {

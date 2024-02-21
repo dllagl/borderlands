@@ -19,11 +19,11 @@
 class player;
 
 class Game {
-
-    sf::RenderWindow *mainWindow_;                ///< game window 
-    sf::Event event_;                             ///< event object for key pressing 
-    uint16_t mainWindowWidth_, mainWindowHeight_; ///< x and y dimensions
-    Player* mainPlayer_;                          ///< main player 
+    
+    std::unique_ptr<sf::RenderWindow> mainWindow_; ///< game window 
+    sf::Event event_;                              ///< event object for key pressing 
+    uint16_t mainWindowWidth_, mainWindowHeight_;  ///< x and y dimensions
+    std::unique_ptr<Player> mainPlayer_;           ///< main player 
 
     public :
 
