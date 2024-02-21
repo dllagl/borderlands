@@ -14,10 +14,6 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-// external lib 
-#include <SFML/Graphics.hpp>
-
-// game lib 
 #include "Player.hpp"
 
 class player;

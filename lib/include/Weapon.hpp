@@ -11,9 +11,7 @@
 #define WEAPON_HPP
 
 
-#include <SFML/Graphics.hpp>
 #include <vector>
-#include <cmath>
 #include <chrono>
 
 #include "Bullet.hpp"

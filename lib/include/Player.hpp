@@ -14,9 +14,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <SFML/Graphics.hpp>
-#include <cmath>
-
 #include "Weapon.hpp"
 
 class Weapon;
