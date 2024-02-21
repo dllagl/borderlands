@@ -42,4 +42,3 @@ build/
 # doxygen 
 html/
 latex/ 
-Doxyfile
