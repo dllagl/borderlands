@@ -1,7 +1,7 @@
 /**
  * @file Bullet.hpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
- * @brief Class of basic bull_ets properties 
+ * @brief Class of basic bullets properties 
  * @date 2024-02-02
  * 
  * @copyright Copyright (c) 2024

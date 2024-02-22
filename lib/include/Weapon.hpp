@@ -24,7 +24,7 @@ class Bullet;
 class Weapon {
 
     // body 
-    sf::RectangleShape shape_;                  ///< weapon shape (a rectangle at this point)
+    std::unique_ptr<sf::RectangleShape> shape_; ///< weapon shape (a rectangle at this point)
     static const float width_, height_;         ///< weapon's x and y dimensions
     sf::Vector2f offsetOriginFromPlayerCenter_; ///< offset position coordonate from player's body
 

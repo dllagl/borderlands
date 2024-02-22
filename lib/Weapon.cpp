@@ -38,17 +38,17 @@ Weapon::~Weapon() {
 void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
     // body
-    shape_ = sf::RectangleShape();
-    shape_.setSize(sf::Vector2f(width_,height_));
+    shape_ = std::make_unique<sf::RectangleShape>();
+    shape_->setSize(sf::Vector2f(width_,height_));
 
     /**
      * The origin of the weapon is set to the geometrical center 
      * of the player in order to rotate around its axis.
      */
     offsetOriginFromPlayerCenter_ = sf::Vector2f(-8.f, 30.f);
-    shape_.setOrigin(offsetOriginFromPlayerCenter_);
-    shape_.setPosition(pos);
-    shape_.setFillColor(sf::Color::Red);
+    shape_->setOrigin(offsetOriginFromPlayerCenter_);
+    shape_->setPosition(pos);
+    shape_->setFillColor(sf::Color::Red);
 
     // ammunitions
     maxAmmo_ = 100;
@@ -72,8 +72,8 @@ void Weapon::Update(
     ) {
 
     // movements and rotations are updated following main player's body's
-    shape_.setPosition(pos);
-    shape_.setRotation(rotation);
+    shape_->setPosition(pos);
+    shape_->setRotation(rotation);
 
     // weapon
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && (currentAmmoInClip_ != 0)) {
@@ -102,7 +102,7 @@ void Weapon::Update(
 void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) {
 
     // weapon 
-    window->draw(shape_);
+    window->draw(*shape_);
 
     // bullets
     if (!bullets_.empty())
@@ -130,9 +130,9 @@ void Weapon::Shoot(sf::Vector2f& direction) {
         // spawn bullet and move it 
         bullets_.push_back(
             std::make_unique<Bullet>(
-                shape_.getPosition(),
+                shape_->getPosition(),
                 offsetOriginFromPlayerCenter_,
-                shape_.getRotation(),
+                shape_->getRotation(),
                 direction,
                 width_
                 )
