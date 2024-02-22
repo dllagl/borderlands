@@ -51,13 +51,13 @@ void Weapon::InitAttributs(const sf::Vector2f& pos) {
     shape_->setFillColor(sf::Color::Red);
 
     // ammunitions
-    maxAmmo_ = 100;
+    maxAmmo_ = 240;
     clipSize_ = 21;
     currentAmmoInClip_ = clipSize_;
     currentAmmoLeft_ = maxAmmo_ - currentAmmoInClip_;
 
     // bullets
-    fireRate_ = 5.f;
+    fireRate_ = 10.f;
     fireRange_ = 200.f;
     bulletVelocity_ = 500.f;
 }
@@ -77,8 +77,25 @@ void Weapon::Update(
 
     // weapon
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && (currentAmmoInClip_ != 0)) {
+
+        /*
+        Shoot if: 
+        - fire button pressed 
+        - AND at least one ammo in the magazine 
+        */
         Shoot(aimingDirection);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && (currentAmmoLeft_ != 0)) {
+
+    } else if (
+        sf::Keyboard::isKeyPressed(sf::Keyboard::R) 
+        && (currentAmmoLeft_ != 0)
+        && (currentAmmoInClip_ != clipSize_) ) {
+
+        /*
+        Reload if:
+        - reload key pressed 
+        - AND at least one available ammo remains 
+        - AND the magazine is not already full 
+        */
         Reload();
     }
 

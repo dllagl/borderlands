@@ -7,6 +7,7 @@ add_library( ${LIBNAME}
     Player.cpp
     Bullet.cpp
     Weapon.cpp
+    Hud.cpp
 )
 
 # Include dir 

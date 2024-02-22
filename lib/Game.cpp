@@ -19,6 +19,7 @@ Game::Game() {
 
     InitAttributs();
     InitPlayer();
+    InitHud();
     Run();
 }
 
@@ -35,21 +36,32 @@ Game::~Game() {
 
 void Game::InitAttributs() {
 
-    mainWindowWidth_ = 1200;
-    mainWindowHeight_ = 800;    
+    mainWindowSize_.x = 1200;
+    mainWindowSize_.y = 800;    
 
     mainWindow_ = std::make_unique<sf::RenderWindow>(
-        sf::VideoMode(mainWindowWidth_,mainWindowHeight_), "SMFL works!"
+        sf::VideoMode(mainWindowSize_.x,mainWindowSize_.y), "SMFL works!"
     );
-
     mainWindow_->setFramerateLimit(60);
 }
 
+
+
 void Game::InitPlayer() {
-    mainPlayer_ = std::make_unique<Player>(
-        sf::Vector2f(mainWindowWidth_/2.f, mainWindowHeight_/2.f)
-    );
+    mainPlayer_ = std::make_unique<Player>(mainWindowSize_/2.f);
 }
+
+
+
+void Game::InitHud() {
+    hud_ = std::make_unique<Hud>(
+        mainPlayer_->getAmmoInClip(),
+        mainPlayer_->getTotalAmmoLeft(),
+        sf::Vector2f(mainWindowSize_.x, mainWindowSize_.y)
+        );
+}
+
+
 
 void Game::Run() {
 
@@ -67,10 +79,21 @@ void Game::Run() {
     }
 }
 
+
+
 void Game::Update(const sf::Time& timeSinceLastFrame) {
+
+    // keyboard events
     PollEvents();
+
+    // main player
     mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
+
+    // head up display
+    hud_->Update(mainPlayer_->getAmmoInClip(),mainPlayer_->getTotalAmmoLeft());
 }
+
+
 
 void Game::Render() {
 
@@ -78,10 +101,13 @@ void Game::Render() {
     mainWindow_->clear();
 
     mainPlayer_->Render(mainWindow_);
+
+    hud_->Render(mainWindow_);
     
     // display updated assets
     mainWindow_->display();
 }
+
 
 
 void Game::PollEvents() {

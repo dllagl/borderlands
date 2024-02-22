@@ -15,15 +15,18 @@
 #define GAME_HPP
 
 #include "Player.hpp"
+#include "Hud.hpp"
 
 class player;
+class Hud;
 
 class Game {
     
     std::unique_ptr<sf::RenderWindow> mainWindow_; ///< game window 
     sf::Event event_;                              ///< event object for key pressing 
-    uint16_t mainWindowWidth_, mainWindowHeight_;  ///< x and y dimensions
+    sf::Vector2f mainWindowSize_;                  ///< x and y dimensions
     std::unique_ptr<Player> mainPlayer_;           ///< main player 
+    std::unique_ptr<Hud> hud_;                     ///< head up display 
 
     public :
 
@@ -44,6 +47,9 @@ class Game {
 
         /** @brief Initialise main player */
         void InitPlayer();
+
+        /** @brief Initialise HUD */
+        void InitHud();
 
         /** @brief Handles keyboard interaction with the main window */
         void PollEvents(); 

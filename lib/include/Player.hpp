@@ -59,6 +59,12 @@ class Player {
          */
         void Render(const std::unique_ptr<sf::RenderWindow>& window);
 
+        /** @brief Return current number of ammo in the weapon's magazine */
+        inline const uint16_t getAmmoInClip() const { return smg_->getAmmoInClip(); }
+
+        /** @brief Return the total number of ammunitions left for the player */
+        inline const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
+
 
     protected :
 
