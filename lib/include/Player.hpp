@@ -31,15 +31,11 @@ class Player {
     std::unique_ptr<Weapon> smg_; ///< equiped weapon                      
 
 
-
-
-
     public : 
 
         /**
          * @brief Construct a new Player object
          * 
-         * @param window window to be rendered in 
          * @param pos default x and y position's coordonates
          */
         Player(const sf::Vector2f& pos);
@@ -86,7 +82,7 @@ class Player {
          * This function computes the angle between the player's body 
          * and the cursor to set the according rotation angle. 
          * 
-         * @param window 
+         * @param window window to be rendered in
          */
         void Rotate(const std::unique_ptr<sf::RenderWindow>& window);
 

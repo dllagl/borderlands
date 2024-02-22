@@ -37,6 +37,7 @@ Weapon::~Weapon() {
 
 void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
+    // body
     shape_ = sf::RectangleShape();
     shape_.setSize(sf::Vector2f(width_,height_));
 
@@ -49,11 +50,19 @@ void Weapon::InitAttributs(const sf::Vector2f& pos) {
     shape_.setPosition(pos);
     shape_.setFillColor(sf::Color::Red);
 
+    // ammunitions
+    maxAmmo_ = 100;
+    clipSize_ = 21;
+    currentAmmoInClip_ = clipSize_;
+    currentAmmoLeft_ = maxAmmo_ - currentAmmoInClip_;
+
     // bullets
     fireRate_ = 5.f;
     fireRange_ = 200.f;
     bulletVelocity_ = 500.f;
 }
+
+
 
 void Weapon::Update(
     const sf::Vector2f& pos,
@@ -67,7 +76,11 @@ void Weapon::Update(
     shape_.setRotation(rotation);
 
     // weapon
-    Shoot(aimingDirection);
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && (currentAmmoInClip_ != 0)) {
+        Shoot(aimingDirection);
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && (currentAmmoLeft_ != 0)) {
+        Reload();
+    }
 
     // bullets
     if (!bullets_.empty()) {
@@ -84,6 +97,8 @@ void Weapon::Update(
     }  
 }
 
+
+
 void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) {
 
     // weapon 
@@ -93,6 +108,8 @@ void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) {
     if (!bullets_.empty())
         for (const auto& b : bullets_) { b->Render(window); }
 }
+
+
 
 void Weapon::Shoot(sf::Vector2f& direction) {
 
@@ -105,8 +122,7 @@ void Weapon::Shoot(sf::Vector2f& direction) {
         currentTime - lastShotFired
         ).count() / 1000.0;
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) 
-        && (elapsedTime >= 1.f/fireRate_) ) {
+    if ( elapsedTime >= 1.f/fireRate_ ) {
 
         // normalize aiming direction vector 
         direction /= static_cast<float>(sqrt(pow(direction.x,2) + pow(direction.y,2)));
@@ -122,6 +138,27 @@ void Weapon::Shoot(sf::Vector2f& direction) {
                 )
             );
 
+        currentAmmoInClip_--; // decrease remaining ammo in clip
+
         lastShotFired = currentTime;
+    }       
+}
+
+
+
+void Weapon::Reload() {
+
+    // number of ammo required to refill the clip
+    const uint16_t ammoToReload = clipSize_ - currentAmmoInClip_;
+
+    if (ammoToReload <= currentAmmoLeft_) {
+        // reload to full capacity 
+        currentAmmoInClip_ += ammoToReload;
+        currentAmmoLeft_ -= ammoToReload;
+    } else {
+        // reload with the total remaining of bullets
+        currentAmmoInClip_ += currentAmmoLeft_;
+        currentAmmoLeft_ = 0;
     }
+        
 }
