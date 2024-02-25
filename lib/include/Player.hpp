@@ -73,9 +73,14 @@ class Player {
         /** @brief Return player's current health */
         inline const uint16_t getCurrentHealth() const { return currentHealth_; }
 
+        /** @brief Return player's maximum health */
+        inline const uint16_t getMaxHealth() const { return maxHealth_; }
+
         /** @brief Return player's current shield */
         inline const uint16_t getCurrentShield() const { return currentShield_; }
 
+        /** @brief Return player's maximum shield */
+        inline const uint16_t getMaxShield() const { return maxShield_; }
 
 
     protected :

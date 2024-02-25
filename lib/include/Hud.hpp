@@ -31,12 +31,17 @@ class Hud {
     std::unique_ptr<sf::Text> healthText_; ///< text object to display current health 
     sf::Vector2f healthTextPosition_;      ///< health text (x,y) position
     uint16_t displayedHealth_;             ///< current health displayed on screen
+    sf::RectangleShape healthBgRectangle_; ///< background health rectangle (fixed size)
+    std::unique_ptr<sf::RectangleShape> healthRectangle_; ///< rectangle representing player's health
 
     // shield 
     std::unique_ptr<sf::Font> shieldFont_; ///< font for shield text 
     std::unique_ptr<sf::Text> shieldText_; ///< text object to display current shield 
     sf::Vector2f shieldTextPosition_;      ///< shield text (x,y) position
     uint16_t displayedShield_;             ///< current shield displayed on screen
+    sf::RectangleShape shieldBgRectangle_;
+    std::unique_ptr<sf::RectangleShape> shieldRectangle_;
+
 
     public:
 
@@ -69,13 +74,17 @@ class Hud {
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
          * @param playerHealth player's current health
+         * @param playerMaxHealth player's maximum health
          * @param playerShield player's current shield
+         * @param playerMaxShield player's maximum shield
          */
         void Update(
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
             const uint16_t playerHealth,
-            const uint16_t playerShield
+            const uint16_t playerMaxHealth,
+            const uint16_t playerShield,
+            const uint16_t playerMaxShield
             );
 
         /**

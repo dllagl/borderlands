@@ -95,7 +95,9 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
         mainPlayer_->getAmmoInClip(),
         mainPlayer_->getTotalAmmoLeft(),
         mainPlayer_->getCurrentHealth(),
-        mainPlayer_->getCurrentShield()
+        mainPlayer_->getMaxHealth(),
+        mainPlayer_->getCurrentShield(),
+        mainPlayer_->getMaxShield()
         );
 }
 
