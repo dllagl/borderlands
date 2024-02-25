@@ -15,13 +15,8 @@
 // ctors / dtor 
 ////////////////////////////////////
 
-Hud::Hud(
-    const uint16_t ammoLeftInClip,
-    const uint16_t totalAmmoLeft,
-    const uint16_t playerHealth,
-    const uint16_t playerShield,
-    const sf::Vector2f windowSize) {
-    InitAttributs(ammoLeftInClip, totalAmmoLeft, playerHealth, playerShield, windowSize);
+Hud::Hud(const sf::Vector2f& windowSize) {
+    InitAttributs(windowSize);
 }
 
 
@@ -30,16 +25,11 @@ Hud::Hud(
 // methods
 ////////////////////////////////////
 
-void Hud::InitAttributs(
-    const uint16_t ammoLeftInClip,
-    const uint16_t totalAmmoLeft,
-    const uint16_t playerHealth,
-    const uint16_t playerShield,
-    const sf::Vector2f windowSize) {
+void Hud::InitAttributs(const sf::Vector2f& windowSize) {
 
-    InitAmmoDisplay(ammoLeftInClip, totalAmmoLeft, windowSize);
-    InitHealthDisplay(playerHealth, windowSize);
-    InitShieldDisplay(playerShield, windowSize);
+    InitAmmoDisplay(windowSize);
+    InitHealthDisplay(windowSize);
+    InitShieldDisplay(windowSize);
 
 }
 
@@ -79,10 +69,7 @@ void Hud::Render(const std::unique_ptr<sf::RenderWindow>& window) {
 
 
 
-void Hud::InitAmmoDisplay(
-    const uint16_t ammoLeftInClip,
-    const uint16_t totalAmmoLeft,
-    const sf::Vector2f windowSize) {
+void Hud::InitAmmoDisplay(const sf::Vector2f& windowSize) {
 
     ammoFont_ = std::make_unique<sf::Font>();
     ammoFont_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
@@ -97,7 +84,7 @@ void Hud::InitAmmoDisplay(
 
 
 
-void Hud::InitHealthDisplay(const uint16_t playerHealth, const sf::Vector2f windowSize) {
+void Hud::InitHealthDisplay(const sf::Vector2f& windowSize) {
 
     healthFont_ = std::make_unique<sf::Font>();
     healthFont_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
@@ -111,7 +98,7 @@ void Hud::InitHealthDisplay(const uint16_t playerHealth, const sf::Vector2f wind
 
 
 
-void Hud::InitShieldDisplay(const uint16_t playerShield, const sf::Vector2f windowSize) {
+void Hud::InitShieldDisplay(const sf::Vector2f& windowSize) {
 
     shieldFont_ = std::make_unique<sf::Font>();
     shieldFont_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
