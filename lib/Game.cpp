@@ -54,7 +54,12 @@ void Game::InitPlayer() {
 
 
 void Game::InitHud() {
-    hud_ = std::make_unique<Hud>(mainWindowSize_);
+    hud_ = std::make_unique<Hud>(
+        mainPlayer_->getCurrentHealth(),
+        mainPlayer_->getCurrentShield(),
+        mainPlayer_->getAmmoInClip(),
+        mainPlayer_->getTotalAmmoLeft(),
+        mainWindowSize_);
 }
 
 
