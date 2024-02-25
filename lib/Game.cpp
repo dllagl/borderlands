@@ -57,6 +57,8 @@ void Game::InitHud() {
     hud_ = std::make_unique<Hud>(
         mainPlayer_->getAmmoInClip(),
         mainPlayer_->getTotalAmmoLeft(),
+        mainPlayer_->getCurrentHealth(),
+        mainPlayer_->getCurrentShield(),
         sf::Vector2f(mainWindowSize_.x, mainWindowSize_.y)
         );
 }
@@ -90,7 +92,12 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
     mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
 
     // head up display
-    hud_->Update(mainPlayer_->getAmmoInClip(),mainPlayer_->getTotalAmmoLeft());
+    hud_->Update(
+        mainPlayer_->getAmmoInClip(),
+        mainPlayer_->getTotalAmmoLeft(),
+        mainPlayer_->getCurrentHealth(),
+        mainPlayer_->getCurrentShield()
+        );
 }
 
 

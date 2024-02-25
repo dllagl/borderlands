@@ -27,6 +27,9 @@ class Player {
     float rotationForce_;                        ///< angular velocity
     sf::Vector2f lookingDirection_;              ///< vector of the player's rotation direction
 
+    uint16_t maxHealth_, currentHealth_; ///< maximum and current health
+    uint16_t maxShield_, currentShield_; ///< maximum and current shield
+
     // weapon properties
     std::unique_ptr<Weapon> smg_; ///< equiped weapon                      
 
@@ -59,11 +62,20 @@ class Player {
          */
         void Render(const std::unique_ptr<sf::RenderWindow>& window);
 
+
+
         /** @brief Return current number of ammo in the weapon's magazine */
         inline const uint16_t getAmmoInClip() const { return smg_->getAmmoInClip(); }
 
         /** @brief Return the total number of ammunitions left for the player */
         inline const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
+
+        /** @brief Return player's current health */
+        inline const uint16_t getCurrentHealth() const { return currentHealth_; }
+
+        /** @brief Return player's current shield */
+        inline const uint16_t getCurrentShield() const { return currentShield_; }
+
 
 
     protected :

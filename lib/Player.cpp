@@ -45,6 +45,8 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     // player initial properties
     acc_ = 500.f;
     rotationForce_ = 0.05f;
+    currentHealth_ = maxHealth_ = 100;
+    currentShield_ = maxShield_ = 100;
 
     // set player at the center of the window at launch
     shape_ = std::make_unique<sf::RectangleShape>();

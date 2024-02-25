@@ -15,6 +15,7 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <iostream>
 
 
 class Hud {
@@ -23,6 +24,16 @@ class Hud {
     std::unique_ptr<sf::Font> ammoFont_; ///< font for ammo text 
     std::unique_ptr<sf::Text> ammoText_; ///< text object to display current ammo 
     sf::Vector2f ammoTextPosition_;      ///< ammo text (x,y) position
+
+    // health 
+    std::unique_ptr<sf::Font> healthFont_; ///< font for health text 
+    std::unique_ptr<sf::Text> healthText_; ///< text object to display current health 
+    sf::Vector2f healthTextPosition_;      ///< health text (x,y) position
+
+    // shield 
+    std::unique_ptr<sf::Font> shieldFont_; ///< font for shield text 
+    std::unique_ptr<sf::Text> shieldText_; ///< text object to display current shield 
+    sf::Vector2f shieldTextPosition_;      ///< shield text (x,y) position
 
     public:
 
@@ -34,9 +45,17 @@ class Hud {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param playerHealth player's current health
+         * @param playerShield player's current shield
          * @param windowSize main window's (x,y) dimensions
          */
-        Hud(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft, const sf::Vector2f windowSize); 
+        Hud(
+            const uint16_t ammoLeftInClip,
+            const uint16_t totalAmmoLeft,
+            const uint16_t playerHealth,
+            const uint16_t playerShield,
+            const sf::Vector2f windowSize
+            ); 
 
         /** @brief Destroy a Hud object */
         virtual ~Hud() {};
@@ -46,8 +65,15 @@ class Hud {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param playerHealth player's current health
+         * @param playerShield player's current shield
          */
-        void Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft);
+        void Update(
+            const uint16_t ammoLeftInClip,
+            const uint16_t totalAmmoLeft,
+            const uint16_t playerHealth,
+            const uint16_t playerShield
+            );
 
         /**
          * @brief Render HUD on game's window
@@ -64,11 +90,15 @@ class Hud {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param playerHealth player's current health
+         * @param playerShield player's current shield
          * @param windowSize main window's (x,y) dimensions
          */
         void InitAttributs(
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
+            const uint16_t playerHealth,
+            const uint16_t playerShield,
             const sf::Vector2f windowSize
             );
 
@@ -85,7 +115,21 @@ class Hud {
             const sf::Vector2f windowSize
         );
 
-    
+        /**
+         * @brief Initialise main player's health display
+         * 
+         * @param playerHealth player's current health
+         * @param windowSize main window's (x,y) dimensions
+         */
+        void InitHealthDisplay(const uint16_t playerHealth, const sf::Vector2f windowSize);
+
+        /**
+         * @brief Initialise main player's shield display
+         * 
+         * @param playerShield player's current shield
+         * @param windowSize main window's (x,y) dimensions
+         */
+        void InitShieldDisplay(const uint16_t playerShield, const sf::Vector2f windowSize);
 
 };
 
