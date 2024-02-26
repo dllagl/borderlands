@@ -65,22 +65,22 @@ class Player {
 
 
         /** @brief Return current number of ammo in the weapon's magazine */
-        inline const uint16_t getAmmoInClip() const { return smg_->getAmmoInClip(); }
+        const uint16_t getAmmoInClip() const { return smg_->getAmmoInClip(); }
 
         /** @brief Return the total number of ammunitions left for the player */
-        inline const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
+        const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
 
         /** @brief Return player's current health */
-        inline const uint16_t getCurrentHealth() const { return currentHealth_; }
+        const uint16_t getCurrentHealth() const { return currentHealth_; }
 
         /** @brief Return player's maximum health */
-        inline const uint16_t getMaxHealth() const { return maxHealth_; }
+        const uint16_t getMaxHealth() const { return maxHealth_; }
 
         /** @brief Return player's current shield */
-        inline const uint16_t getCurrentShield() const { return currentShield_; }
+        const uint16_t getCurrentShield() const { return currentShield_; }
 
         /** @brief Return player's maximum shield */
-        inline const uint16_t getMaxShield() const { return maxShield_; }
+        const uint16_t getMaxShield() const { return maxShield_; }
 
 
     protected :

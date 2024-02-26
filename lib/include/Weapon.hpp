@@ -14,7 +14,6 @@
 #include <vector>
 #include <chrono>
 #include <memory>
-#include <iostream>
 
 #include "Bullet.hpp"
 
@@ -80,10 +79,10 @@ class Weapon {
         void Render(const std::unique_ptr<sf::RenderWindow>& window); 
 
         /** @brief Return current number of ammo in the weapon's magazine */
-        inline const uint16_t getAmmoInClip() const { return currentAmmoInClip_; }
+        const uint16_t getAmmoInClip() const { return currentAmmoInClip_; }
 
         /** @brief Return the total number of ammunitions left for the player */
-        inline const uint16_t getTotalAmmoLeft() const { return currentAmmoLeft_; }
+        const uint16_t getTotalAmmoLeft() const { return currentAmmoLeft_; }
 
     protected : 
 

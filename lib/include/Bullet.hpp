@@ -67,7 +67,7 @@ class Bullet {
         void Render(const std::unique_ptr<sf::RenderWindow>& window);
 
         /** @brief return true if bullet has traveled its maximum distance */
-        inline const bool getHasReachedMaxDistance() const { return hasReachedMaxDistance_; }
+        const bool getHasReachedMaxDistance() const { return hasReachedMaxDistance_; }
 
 
     protected : 

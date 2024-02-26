@@ -39,8 +39,8 @@ class Hud {
     std::unique_ptr<sf::Text> shieldText_; ///< text object to display current shield 
     sf::Vector2f shieldTextPosition_;      ///< shield text (x,y) position
     uint16_t displayedShield_;             ///< current shield displayed on screen
-    sf::RectangleShape shieldBgRectangle_;
-    std::unique_ptr<sf::RectangleShape> shieldRectangle_;
+    sf::RectangleShape shieldBgRectangle_; ///< background shield rectangle (fixed size)
+    std::unique_ptr<sf::RectangleShape> shieldRectangle_; ///< rectangle representing player's shield
 
 
     public:
