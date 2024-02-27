@@ -36,11 +36,11 @@ Game::~Game() {
 
 void Game::InitAttributs() {
 
-    mainWindowSize_.x = 1200;
-    mainWindowSize_.y = 800;    
+    mainWindowSize_.x = 1920;
+    mainWindowSize_.y = 1080;    
 
     mainWindow_ = std::make_unique<sf::RenderWindow>(
-        sf::VideoMode(mainWindowSize_.x,mainWindowSize_.y), "SMFL works!"
+        sf::VideoMode(mainWindowSize_.x,mainWindowSize_.y), "SMFL works!", sf::Style::Fullscreen
     );
     mainWindow_->setFramerateLimit(60);
 }

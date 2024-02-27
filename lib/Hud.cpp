@@ -127,7 +127,7 @@ void Hud::InitAmmoDisplay(const sf::Vector2f& windowSize) {
     ammoText_ = std::make_unique<sf::Text>();
     ammoText_->setFont(*ammoFont_);
     ammoText_->setCharacterSize(50);
-    ammoText_->setPosition(0.85f*windowSize.x, 0.9f*windowSize.y);
+    ammoText_->setPosition(0.89f*windowSize.x, 0.9f*windowSize.y);
     ammoText_->setFillColor(sf::Color::Red);
 
     /*
