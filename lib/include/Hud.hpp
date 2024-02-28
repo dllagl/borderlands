@@ -10,38 +10,19 @@
 #ifndef HUD_HPP
 #define HUD_HPP
 
-#include <SFML/Graphics.hpp>
-#include <memory>
-#include <string>
-#include <iomanip>
-#include <sstream>
+#include "Hud_health.hpp"
+#include "Hud_shield.hpp"
+#include "Hud_ammo.hpp"
 
+class Hud_health;
+class Hud_shield;
+class Hud_ammo;
 
 class Hud {
 
-    // ammo 
-    std::unique_ptr<sf::Font> ammoFont_;   ///< font for ammo text 
-    std::unique_ptr<sf::Text> ammoText_;   ///< text object to display current ammo 
-    sf::Vector2f ammoTextPosition_;        ///< ammo text (x,y) position
-    uint16_t displayedAmmoInClip_;         ///< current ammo in clip displayed on screen
-    uint16_t displayedTotalAmmo_;          ///< current total ammo left displayed on screen
-
-    // health 
-    std::unique_ptr<sf::Font> healthFont_; ///< font for health text 
-    std::unique_ptr<sf::Text> healthText_; ///< text object to display current health 
-    sf::Vector2f healthTextPosition_;      ///< health text (x,y) position
-    uint16_t displayedHealth_;             ///< current health displayed on screen
-    sf::RectangleShape healthBgRectangle_; ///< background health rectangle (fixed size)
-    std::unique_ptr<sf::RectangleShape> healthRectangle_; ///< rectangle representing player's health
-
-    // shield 
-    std::unique_ptr<sf::Font> shieldFont_; ///< font for shield text 
-    std::unique_ptr<sf::Text> shieldText_; ///< text object to display current shield 
-    sf::Vector2f shieldTextPosition_;      ///< shield text (x,y) position
-    uint16_t displayedShield_;             ///< current shield displayed on screen
-    sf::RectangleShape shieldBgRectangle_; ///< background shield rectangle (fixed size)
-    std::unique_ptr<sf::RectangleShape> shieldRectangle_; ///< rectangle representing player's shield
-
+    std::unique_ptr<Hud_health> hudHealth_; ///< health display on HUD 
+    std::unique_ptr<Hud_shield> hudShield_; ///< shield display on HUD 
+    std::unique_ptr<Hud_ammo> hudAmmo_;     ///< ammo display on HUD
 
     public:
 
@@ -101,28 +82,13 @@ class Hud {
          * 
          * @param windowSize main window's (x,y) dimensions
          */
-        void InitAttributs(const sf::Vector2f& windowSize);
-
-        /**
-         * @brief Initialise ammo display properties
-         * 
-         * @param windowSize main window's (x,y) dimensions
-         */
-        void InitAmmoDisplay(const sf::Vector2f& windowSize);
-
-        /**
-         * @brief Initialise main player's health display
-         * 
-         * @param windowSize main window's (x,y) dimensions
-         */
-        void InitHealthDisplay(const sf::Vector2f& windowSize);
-
-        /**
-         * @brief Initialise main player's shield display
-         * 
-         * @param windowSize main window's (x,y) dimensions
-         */
-        void InitShieldDisplay(const sf::Vector2f& windowSize);
+        void InitAttributs(
+            const uint16_t playerHealth,
+            const uint16_t playerShield,
+            const uint16_t ammoLeftInClip,
+            const uint16_t totalAmmoLeft,
+            const sf::Vector2f& windowSize
+        );
 
 };
 

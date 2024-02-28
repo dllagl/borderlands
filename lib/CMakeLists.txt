@@ -8,6 +8,9 @@ add_library( ${LIBNAME}
     Bullet.cpp
     Weapon.cpp
     Hud.cpp
+    Hud_health.cpp
+    Hud_shield.cpp
+    Hud_ammo.cpp
 )
 
 # Include dir 
