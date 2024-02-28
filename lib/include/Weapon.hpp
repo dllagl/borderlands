@@ -13,7 +13,6 @@
 
 #include <vector>
 #include <chrono>
-#include <memory>
 
 #include "Bullet.hpp"
 

@@ -42,18 +42,18 @@ void Bullet::InitAttributs(
     color_  = sf::Color::White;
     hasReachedMaxDistance_ = false;
 
+    // shape_ = sf::CircleShape(radius_);
+    shape_ = std::make_unique<sf::CircleShape>(radius_);
     /*
     The bullet origin is based on the weapon's offset from the player's body 
     and and additional offset for it to spawn at the center of the weapon, like 
     a real one. 
     */
-    offsetOriginFromWeapon_ = sf::Vector2f(-( weaponWidth - shape_.getRadius() )/2.f, 0.f);
-
-    shape_ = sf::CircleShape(radius_);
-    shape_.setFillColor(color_);
-    shape_.setOrigin(weaponOffsetFromPlayer + offsetOriginFromWeapon_);
-    shape_.setPosition(initialPosition_);
-    shape_.setRotation(rotation);
+    offsetOriginFromWeapon_ = sf::Vector2f(-( weaponWidth - shape_->getRadius() )/2.f, 0.f);
+    shape_->setFillColor(color_);
+    shape_->setOrigin(weaponOffsetFromPlayer + offsetOriginFromWeapon_);
+    shape_->setPosition(initialPosition_);
+    shape_->setRotation(rotation);
 }
 
 void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance) {
@@ -62,16 +62,16 @@ void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame, co
 
 
 void Bullet::Render(const std::unique_ptr<sf::RenderWindow>& window) {
-    window->draw(shape_);
+    window->draw(*shape_);
 }
 
 void Bullet::Move(const float velocity, const sf::Time& timeSinceLastFrame, const float maxDistance) {
 
-    sf::Vector2f currentPosition = shape_.getPosition() - initialPosition_;
+    sf::Vector2f currentPosition = shape_->getPosition() - initialPosition_;
     float currentPositionNorm = static_cast<float>(sqrt(pow(currentPosition.x,2) + pow(currentPosition.y,2)));
     
     if (currentPositionNorm <= maxDistance) {
-        shape_.move(velocity * dir_ * timeSinceLastFrame.asSeconds());
+        shape_->move(velocity * dir_ * timeSinceLastFrame.asSeconds());
     } else {
         hasReachedMaxDistance_ = true;
     }

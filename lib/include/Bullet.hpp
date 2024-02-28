@@ -13,13 +13,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <memory>
 
 
 class Bullet {
 
     float radius_;                        ///< Radius of the bullet (a sphere for now)
     sf::Color color_;                     ///< Color of the shape
-    sf::CircleShape shape_;               ///< Bullet main shape 
+    std::unique_ptr<sf::CircleShape> shape_; ///< Bullet main shape 
     sf::Vector2f dir_;                    ///< To store the direction of the bullet 
     sf::Vector2f offsetOriginFromWeapon_; ///< offset of bullet's position from weapon
     sf::Vector2f initialPosition_;        ///< spawning bullet's (x,y)  coordonate 
