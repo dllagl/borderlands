@@ -10,14 +10,6 @@
 #include "Game.hpp"
 
 
-////////////////////////////////////
-// static members
-////////////////////////////////////
-
-Game* Game::game_ = nullptr;
-
-
-
 
 ////////////////////////////////////
 // ctors / dtor 
@@ -32,23 +24,16 @@ Game::Game() {
     Run();
 }
 
-Game::~Game() {
-}
-
-
 
 
 ////////////////////////////////////
 // methods 
 ////////////////////////////////////
 
-Game* Game::Instantiate() {
+Game& Game::Instantiate() {
 
-    if (game_ == nullptr) {
-        game_ = new Game();
-    } 
-
-    return game_;
+    static Game gameInstance;
+    return gameInstance;
 }
 
 

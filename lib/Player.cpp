@@ -30,10 +30,6 @@ Player::Player(const sf::Vector2f& pos) {
     InitAttributs(pos);
 }
 
-Player::~Player() {
-}
-
-
 
 
 ////////////////////////////////////

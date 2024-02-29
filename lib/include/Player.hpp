@@ -44,7 +44,7 @@ class Player {
         Player(const sf::Vector2f& pos);
 
         /** @brief Destroy the Player object */
-        virtual ~Player(); 
+        virtual ~Player() {}; 
 
 
         /**

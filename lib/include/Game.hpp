@@ -28,7 +28,6 @@ class Game {
     std::unique_ptr<Player> mainPlayer_;           ///< main player 
     std::unique_ptr<Hud> hud_;                     ///< head up display 
 
-    static Game* game_; ///< Pointer to the single instance of Game
 
     /** @brief Construct a Game object (private for singleton) */
     Game();
@@ -36,14 +35,14 @@ class Game {
     public:
 
         /** @brief Destroy a Game object */
-        virtual ~Game();
+        virtual ~Game() {};
 
         /**
          * @brief Instantiate a Game object as a singleton
          * 
-         * @return A pointer to the only instance of Game, create it if not instanciated yet
+         * @return The reference to the Game instance
          */
-        static Game* Instantiate();
+        static Game& Instantiate();
 
         Game(Game& copy) = delete; // prevent copy
         void operator=(const Game&) = delete; // prevent assignement
