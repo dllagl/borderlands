@@ -80,6 +80,10 @@ class Hud {
         /**
          * @brief Initialise HUD attributes
          * 
+         * @param playerHealth main player's current health
+         * @param playerShield main player's current shield
+         * @param ammoLeftInClip number of ammo left in the weapon's magazine 
+         * @param totalAmmoLeft player's total number of available ammo 
          * @param windowSize main window's (x,y) dimensions
          */
         void InitAttributs(

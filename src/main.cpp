@@ -12,7 +12,8 @@
 
 int main () {
 
-    Game game;
+    Game* game = Game::Instantiate();
+    delete game;
 
     return 0;
 }

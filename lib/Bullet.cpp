@@ -42,7 +42,6 @@ void Bullet::InitAttributs(
     color_  = sf::Color::White;
     hasReachedMaxDistance_ = false;
 
-    // shape_ = sf::CircleShape(radius_);
     shape_ = std::make_unique<sf::CircleShape>(radius_);
     /*
     The bullet origin is based on the weapon's offset from the player's body 
