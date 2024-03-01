@@ -49,7 +49,7 @@ class Hud_ammo {
          * 
          * @param window window to be rendered in
          */
-        void Render(const std::unique_ptr<sf::RenderWindow>& window);
+        void Render(const std::unique_ptr<sf::RenderWindow>& window) const;
 
     protected:
 

@@ -72,7 +72,7 @@ class Game {
         void Update(const sf::Time& timeSinceLastFrame);
 
         /** @brief Render game assets */
-        void Render();
+        void Render() const;
 
         
 };

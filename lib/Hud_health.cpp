@@ -75,7 +75,7 @@ void Hud_health::Update(const uint16_t playerHealth, const uint16_t playerMaxHea
 
 
 
-void Hud_health::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Hud_health::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     window->draw(*text_);
     window->draw(*rect_);

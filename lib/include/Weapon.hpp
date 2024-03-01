@@ -75,7 +75,7 @@ class Weapon {
          * 
          * @param window window to be rendered in
          */
-        void Render(const std::unique_ptr<sf::RenderWindow>& window); 
+        void Render(const std::unique_ptr<sf::RenderWindow>& window) const; 
 
         /** @brief Return current number of ammo in the weapon's magazine */
         const uint16_t getAmmoInClip() const { return currentAmmoInClip_; }

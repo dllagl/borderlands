@@ -116,7 +116,7 @@ void Weapon::Update(
 
 
 
-void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     // weapon 
     window->draw(*shape_);

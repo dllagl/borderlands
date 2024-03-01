@@ -79,6 +79,6 @@ void Hud_ammo::Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLef
 
 
 
-void Hud_ammo::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Hud_ammo::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
     window->draw(*text_);   
 }

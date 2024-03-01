@@ -107,7 +107,7 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
 
 
 
-void Game::Render() {
+void Game::Render() const {
 
     // clear old frame
     mainWindow_->clear();

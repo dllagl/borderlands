@@ -62,7 +62,7 @@ void Hud::Update(
 
 
 
-void Hud::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Hud::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     hudAmmo_->Render(window);
     hudHealth_->Render(window);

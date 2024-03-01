@@ -63,7 +63,7 @@ void Player::Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::T
 }
 
 
-void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
     window->draw(*shape_);
     smg_->Render(window);
 }

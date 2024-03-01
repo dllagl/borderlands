@@ -75,7 +75,7 @@ void Hud_shield::Update(const uint16_t playerShield, const uint16_t playerMaxShi
 
 
 
-void Hud_shield::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Hud_shield::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     window->draw(*text_);
     window->draw(*rect_);

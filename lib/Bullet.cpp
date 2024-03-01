@@ -60,7 +60,7 @@ void Bullet::Update(const float velocity, const sf::Time& timeSinceLastFrame, co
 }
 
 
-void Bullet::Render(const std::unique_ptr<sf::RenderWindow>& window) {
+void Bullet::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
     window->draw(*shape_);
 }
 
