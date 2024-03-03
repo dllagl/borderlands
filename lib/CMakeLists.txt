@@ -11,6 +11,8 @@ add_library( ${LIBNAME}
     Hud_health.cpp
     Hud_shield.cpp
     Hud_ammo.cpp
+    Main_menu.cpp
+    Button.cpp
 )
 
 # Include dir 
