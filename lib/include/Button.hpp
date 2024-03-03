@@ -11,6 +11,7 @@
 #define DEF_BUTTON
 
 #include <memory>
+#include <functional>
 #include "GAME_CONF.hpp"
 
 
@@ -43,7 +44,7 @@ class Button {
          * 
          * @param window window to be rendered in 
          */
-        void Update(const std::unique_ptr<sf::RenderWindow>& window);
+        void Update(const std::unique_ptr<sf::RenderWindow>& window, std::function<void()> func);
 
         /**
          * @brief Render button shape and text

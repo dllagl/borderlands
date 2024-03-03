@@ -54,12 +54,15 @@ void Button::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& size, co
 
 
 
-void Button::Update(const std::unique_ptr<sf::RenderWindow>& window) {
+void Button::Update(const std::unique_ptr<sf::RenderWindow>& window, std::function<void()> func) {
 
     // when hovered
     const sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition());
     if (shape_->getGlobalBounds().contains(mousePos)) {
         shape_->setOutlineThickness(BUTTON::THICKNESS::HOVERED);
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            func();
+        }
     } else {
         shape_->setOutlineThickness(BUTTON::THICKNESS::DEFAULT);
     }

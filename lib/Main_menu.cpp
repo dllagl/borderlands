@@ -37,7 +37,7 @@ void MainMenu::InitAttributs(const std::unique_ptr<sf::RenderWindow>& window) {
 
 
 void MainMenu::Update(const std::unique_ptr<sf::RenderWindow>& window) {
-    quit_->Update(window);
+    quit_->Update(window, [&](){window->close();});
 }
 
 
