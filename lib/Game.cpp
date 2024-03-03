@@ -60,7 +60,6 @@ void Game::InitPlayer() {
 
 void Game::InitPauseMenu() {
     menu_ = std::make_unique<MainMenu>(mainWindow_);
-    isMainMenuOpened_ = false;
 }
 
 
@@ -100,8 +99,8 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
     // keyboard events
     PollEvents();
 
-    // do not update game assets when pause menu is opened
-    if (!isMainMenuOpened_) {
+    // do not update game assets when pause menu is open
+    if (!menu_->getIsOpen()) {
             
         // main player
         mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
@@ -115,10 +114,10 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
             mainPlayer_->getCurrentShield(),
             mainPlayer_->getMaxShield()
             );
-
-    } else {
-        menu_->Update(mainWindow_);
     }
+
+    // pause menu
+    menu_->Update(mainWindow_);
 }
 
 
@@ -128,11 +127,13 @@ void Game::Render() {
     // clear old frame
     mainWindow_->clear();
 
-    mainPlayer_->Render(mainWindow_);
-
-    hud_->Render(mainWindow_);
-
-    if (isMainMenuOpened_) { menu_->Render(mainWindow_); }   
+    // do not render game assets when pause menu is open
+    if (!menu_->getIsOpen()) {
+        mainPlayer_->Render(mainWindow_);
+        hud_->Render(mainWindow_);
+    }
+    
+    menu_->Render(mainWindow_);  
  
     // display updated assets
     mainWindow_->display();
@@ -169,7 +170,8 @@ void Game::PollEvents() {
     static bool wasEscapeKeyPressed = false;
     if (event_.key.code == sf::Keyboard::Escape) {
         if (!wasEscapeKeyPressed) {
-            isMainMenuOpened_ = !isMainMenuOpened_;
+            // open or close pause menu depending on its current state
+            menu_->setIsOpen(!menu_->getIsOpen());
         }
         wasEscapeKeyPressed = true;
     } else {

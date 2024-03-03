@@ -25,10 +25,7 @@ class Game {
     sf::Vector2f mainWindowSize_;                  ///< x and y dimensions
     std::unique_ptr<Player> mainPlayer_;           ///< main player 
     std::unique_ptr<Hud> hud_;                     ///< head up display 
-
-    // pause menu
-    std::unique_ptr<MainMenu> menu_; ///< Pointer to the pause menu object
-    bool isMainMenuOpened_; ///< TRUE if pause menu is opened, FALSE if not
+    std::unique_ptr<MainMenu> menu_;               ///< Pointer to the pause menu object
 
 
     /** @brief Construct a Game object (private for singleton) */

@@ -25,8 +25,11 @@ namespace BUTTON {
     namespace TEXT {
         const sf::Color COLOR   = sf::Color::White;
         constexpr int CHAR_SIZE = 50; 
+    };
+
+    namespace DIM {
         constexpr float WIDTH   = 130.f;
         constexpr float HEIGHT  = 70.f;
         const sf::Vector2f SIZE = sf::Vector2f(WIDTH, HEIGHT);
-    };
+    }
 };

@@ -20,6 +20,7 @@ class Button {
     std::unique_ptr<sf::RectangleShape> shape_; ///< rect shape of the button
     sf::Text text_; ///< text on the button 
     sf::Font font_; ///< text's font
+    std::function<void()> func_; ///< action to perform when clicked
 
     public: 
 
@@ -28,11 +29,13 @@ class Button {
          * 
          * @param pos (x,y) position coordonate 
          * @param size (x,y) rectangle size
+         * @param func function to execute when button is clicked
          * @param text text displayed 
          */
         Button(
             const sf::Vector2f& pos,
             const sf::Vector2f& size,
+            std::function<void()> func,
             const char* text = nullptr
         );
 
@@ -43,8 +46,12 @@ class Button {
          * @brief Update button properties (hovering, clicked, ...)
          * 
          * @param window window to be rendered in 
+         * @param mousePos (x,y) position coordonate of the mouse cursor
          */
-        void Update(const std::unique_ptr<sf::RenderWindow>& window, std::function<void()> func);
+        void Update(
+            const std::unique_ptr<sf::RenderWindow>& window,
+            const sf::Vector2f& mousePos
+        );
 
         /**
          * @brief Render button shape and text

@@ -14,7 +14,12 @@
 // ctors / dtor 
 ////////////////////////////////////
 
-Button::Button(const sf::Vector2f& pos, const sf::Vector2f& size, const char* text) {
+Button::Button(
+    const sf::Vector2f& pos,
+    const sf::Vector2f& size,
+    std::function<void()> func,
+    const char* text) 
+    : func_(func) {
     InitAttributs(pos, size, text);        
 }
 
@@ -54,14 +59,15 @@ void Button::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& size, co
 
 
 
-void Button::Update(const std::unique_ptr<sf::RenderWindow>& window, std::function<void()> func) {
+void Button::Update(
+    const std::unique_ptr<sf::RenderWindow>& window,
+    const sf::Vector2f& mousePos) {
 
     // when hovered
-    const sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition());
     if (shape_->getGlobalBounds().contains(mousePos)) {
         shape_->setOutlineThickness(BUTTON::THICKNESS::HOVERED);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            func();
+            func_();
         }
     } else {
         shape_->setOutlineThickness(BUTTON::THICKNESS::DEFAULT);
