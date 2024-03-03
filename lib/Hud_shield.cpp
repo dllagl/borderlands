@@ -29,14 +29,16 @@ Hud_shield::Hud_shield(const uint16_t playerShield, const sf::Vector2f& windowSi
 void Hud_shield::InitAttributs(const sf::Vector2f& windowSize) {
 
     // background shield rectangle (fixed size, only the outline is colored)
-    bgRect_ = sf::RectangleShape(sf::Vector2f(150.f,20.f));
-    bgRect_.setPosition(0.05f * windowSize.x, 0.94f * windowSize.y);
+    bgRect_ = sf::RectangleShape(sf::Vector2f(180.f,20.f));
+    bgRect_.setOrigin(bgRect_.getSize()/2.f);
+    bgRect_.setPosition(0.09f * windowSize.x, 0.94f * windowSize.y);
     bgRect_.setFillColor(sf::Color::Transparent);
     bgRect_.setOutlineColor(sf::Color::White);
     bgRect_.setOutlineThickness(2.0f);
 
     // actual shield rectangle (its size evolves with player's shield)
     rect_ = std::make_unique<sf::RectangleShape>(bgRect_.getSize());
+    rect_->setOrigin(rect_->getSize()/2.f);
     rect_->setPosition(bgRect_.getPosition());
     rect_->setFillColor(sf::Color::Blue);
 
@@ -46,14 +48,15 @@ void Hud_shield::InitAttributs(const sf::Vector2f& windowSize) {
 
     // text (positioned relatively to the background shield rectangle)
     text_ = std::make_unique<sf::Text>();
+    text_->setString(std::to_string(displayedShield_));
     text_->setFont(*font_);
     text_->setCharacterSize(50);
-    text_->setPosition(
-        bgRect_.getPosition().x + bgRect_.getSize().x + 20.f,
-        bgRect_.getPosition().y - (bgRect_.getSize().y + 5.f)
-    );
+    const sf::FloatRect textBounds = text_->getGlobalBounds();
+    text_->setOrigin(
+            sf::Vector2f(textBounds.left + textBounds.width/2.f, textBounds.top + textBounds.height/2.f)
+        );
+    text_->setPosition(bgRect_.getPosition() + sf::Vector2f(140.f,0.f));
     text_->setFillColor(sf::Color::Blue);
-    text_->setString(std::to_string(displayedShield_));
 }
 
 

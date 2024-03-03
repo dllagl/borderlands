@@ -20,6 +20,7 @@ Game::Game() {
 
     InitAttributs();
     InitPlayer();
+    InitPauseMenu();
     InitHud();
     Run();
 }
@@ -52,7 +53,13 @@ void Game::InitAttributs() {
 
 
 void Game::InitPlayer() {
-    mainPlayer_ = std::make_unique<Player>(mainWindowSize_/2.f);
+    mainPlayer_ = std::make_unique<Player>(mainWindow_->getView().getCenter());
+}
+
+
+
+void Game::InitPauseMenu() {
+    menu_ = std::make_unique<MainMenu>(mainWindow_);
 }
 
 
@@ -63,7 +70,8 @@ void Game::InitHud() {
         mainPlayer_->getCurrentShield(),
         mainPlayer_->getAmmoInClip(),
         mainPlayer_->getTotalAmmoLeft(),
-        mainWindowSize_);
+        mainWindowSize_
+        );
 }
 
 
@@ -91,31 +99,42 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
     // keyboard events
     PollEvents();
 
-    // main player
-    mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
+    // do not update game assets when pause menu is open
+    if (!menu_->getIsOpen()) {
+            
+        // main player
+        mainPlayer_->Update(mainWindow_, timeSinceLastFrame);
 
-    // head up display 
-    hud_->Update(
-        mainPlayer_->getAmmoInClip(),
-        mainPlayer_->getTotalAmmoLeft(),
-        mainPlayer_->getCurrentHealth(),
-        mainPlayer_->getMaxHealth(),
-        mainPlayer_->getCurrentShield(),
-        mainPlayer_->getMaxShield()
-        );
+        // head up display 
+        hud_->Update(
+            mainPlayer_->getAmmoInClip(),
+            mainPlayer_->getTotalAmmoLeft(),
+            mainPlayer_->getCurrentHealth(),
+            mainPlayer_->getMaxHealth(),
+            mainPlayer_->getCurrentShield(),
+            mainPlayer_->getMaxShield()
+            );
+    }
+
+    // pause menu
+    menu_->Update(mainWindow_);
 }
 
 
 
-void Game::Render() const {
+void Game::Render() {
 
     // clear old frame
     mainWindow_->clear();
 
-    mainPlayer_->Render(mainWindow_);
-
-    hud_->Render(mainWindow_);
+    // do not render game assets when pause menu is open
+    if (!menu_->getIsOpen()) {
+        mainPlayer_->Render(mainWindow_);
+        hud_->Render(mainWindow_);
+    }
     
+    menu_->Render(mainWindow_);  
+ 
     // display updated assets
     mainWindow_->display();
 }
@@ -133,13 +152,29 @@ void Game::PollEvents() {
                 break;
             
             case sf::Event::KeyPressed:
-                if (event_.key.code ==sf::Keyboard::Escape) {
-                    mainWindow_->close();
-                }
                 break;
             
             default:
                 break;
         }
+    }
+
+
+    /*
+    Enable pause menu to be opened and closed on demand.
+    
+    The use of a static boolean to save wether or not a key 
+    has been pressed earlier is to avoid flickering of the 
+    MainMenu::shape_ when on display
+    */
+    static bool wasEscapeKeyPressed = false;
+    if (event_.key.code == sf::Keyboard::Escape) {
+        if (!wasEscapeKeyPressed) {
+            // open or close pause menu depending on its current state
+            menu_->setIsOpen(!menu_->getIsOpen());
+        }
+        wasEscapeKeyPressed = true;
+    } else {
+        wasEscapeKeyPressed = false;
     }
 }

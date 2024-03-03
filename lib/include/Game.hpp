@@ -9,17 +9,15 @@
  * @see main.cpp
  * 
  */
-
-
 #ifndef GAME_HPP
 #define GAME_HPP
 
 #include "Player.hpp"
 #include "Hud.hpp"
+#include "Main_menu.hpp"
 
 class player;
 class Hud;
-
 class Game {
     
     std::unique_ptr<sf::RenderWindow> mainWindow_; ///< game window 
@@ -27,6 +25,7 @@ class Game {
     sf::Vector2f mainWindowSize_;                  ///< x and y dimensions
     std::unique_ptr<Player> mainPlayer_;           ///< main player 
     std::unique_ptr<Hud> hud_;                     ///< head up display 
+    std::unique_ptr<MainMenu> menu_;               ///< Pointer to the pause menu object
 
 
     /** @brief Construct a Game object (private for singleton) */
@@ -55,6 +54,9 @@ class Game {
         /** @brief Initialise main player */
         void InitPlayer();
 
+        /** @brief Initialise pause menu */
+        void InitPauseMenu();
+
         /** @brief Initialise HUD */
         void InitHud();
 
@@ -72,7 +74,7 @@ class Game {
         void Update(const sf::Time& timeSinceLastFrame);
 
         /** @brief Render game assets */
-        void Render() const;
+        void Render();
 
         
 };
