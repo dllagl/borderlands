@@ -35,16 +35,28 @@ void MainMenu::InitAttributs(const std::unique_ptr<sf::RenderWindow>& window) {
         window->getView().getCenter(),
         BUTTON::DIM::SIZE,
         [&](){window->close();},
-        "LEAVE")
+        BUTTON::NAME::QUIT
+        )
     );
 
-    // button to resume the game
+    /*
+    Button to close pause menu and resume the game 
+    
+    !!! 
+    NOTE put to sleep current thread for 50 ms after closing the
+    menu to avoid triggering unwanted game action i.e. firing bullets 
+    !!!
+    */
     buttons_.push_back(
         std::make_unique<Button>(
         window->getView().getCenter() - sf::Vector2f(0.f,100.f),
         BUTTON::DIM::SIZE,
-        [&](){setIsOpen(false);},
-        "RESUME")
+        [&](){
+            setIsOpen(false);
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            },
+        BUTTON::NAME::RESUME
+        )
     );
 }
 
@@ -67,7 +79,7 @@ void MainMenu::Update(const std::unique_ptr<sf::RenderWindow>& window) {
 void MainMenu::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     if (isOpen_) {
-        for (auto& b : buttons_) {
+        for (const auto& b : buttons_) {
             b->Render(window);
         }
     }

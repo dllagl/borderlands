@@ -7,8 +7,11 @@
  * @copyright Copyright (c) 2024
  * 
  */
+#ifndef DEF_GAME_CONF
+#define DEF_GAME_CONF
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 /** @brief Constants related to pause menu buttons */
 namespace BUTTON {
@@ -31,5 +34,13 @@ namespace BUTTON {
         constexpr float WIDTH   = 130.f;
         constexpr float HEIGHT  = 70.f;
         const sf::Vector2f SIZE = sf::Vector2f(WIDTH, HEIGHT);
-    }
+    };
+
+    namespace NAME {
+        const char* const QUIT   = "LEAVE";
+        const char* const RESUME = "RESUME"; 
+    };
 };
+
+
+#endif // DEF_GAME_CONF
