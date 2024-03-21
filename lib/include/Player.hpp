@@ -14,7 +14,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include "Weapon.hpp"
+#include "Smg.hpp"
 
 class Weapon;
 
@@ -31,8 +31,7 @@ class Player {
     uint16_t maxShield_, currentShield_; ///< maximum and current shield
 
     // weapon properties
-    std::unique_ptr<Weapon> smg_; ///< equiped weapon                      
-
+    std::unique_ptr<Smg> smg_; ///< equiped weapon
 
     public : 
 

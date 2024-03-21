@@ -6,13 +6,13 @@ add_library( ${LIBNAME}
     Game.cpp
     Player.cpp
     Bullet.cpp
-    Weapon.cpp
     Hud.cpp
     Hud_health.cpp
     Hud_shield.cpp
     Hud_ammo.cpp
     Main_menu.cpp
     Button.cpp
+    Smg.cpp
 )
 
 # Include dir 

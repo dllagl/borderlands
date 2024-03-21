@@ -1,45 +1,34 @@
 /**
- * @file Weapon.cpp
+ * @file Smg.cpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief 
- * @date 2024-02-04
+ * @date 2024-03-20
  * 
  * @copyright Copyright (c) 2024
  * 
  */
 
-#include "Weapon.hpp"
-
-////////////////////////////////////
-// static members 
-////////////////////////////////////
-
-const float Weapon::width_  = 15.f;
-const float Weapon::height_ = 25.f;
-
+#include "Smg.hpp"
 
 ////////////////////////////////////
 // ctors / dtor 
 ////////////////////////////////////
 
-Weapon::Weapon(const sf::Vector2f& pos) {
+Smg::Smg(const sf::Vector2f& pos) {
     InitAttributs(pos);
 }
-
-Weapon::~Weapon() {
-}
-
-
 
 ////////////////////////////////////
 // methods
 ////////////////////////////////////
 
-void Weapon::InitAttributs(const sf::Vector2f& pos) {
+void Smg::InitAttributs(const sf::Vector2f& pos) {
 
-    // body
+    // body 
     shape_ = std::make_unique<sf::RectangleShape>();
-    shape_->setSize(sf::Vector2f(width_,height_));
+    width_ = 15.f;
+    height_ = 25.f;
+    shape_->setSize(sf::Vector2f(width_, height_));
 
     /**
      * The origin of the weapon is set to the geometrical center 
@@ -50,21 +39,24 @@ void Weapon::InitAttributs(const sf::Vector2f& pos) {
     shape_->setPosition(pos);
     shape_->setFillColor(sf::Color::Red);
 
-    // ammunitions
-    maxAmmo_ = 240;
-    clipSize_ = 21;
-    currentAmmoInClip_ = clipSize_;
+
+    // ammunitions 
+    maxAmmo_ = 300;
+    magazineSize_ = 22;
+    currentAmmoInClip_ = magazineSize_;
     currentAmmoLeft_ = maxAmmo_ - currentAmmoInClip_;
 
     // bullets
     fireRate_ = 10.f;
     fireRange_ = 200.f;
     bulletVelocity_ = 500.f;
+
 }
 
 
 
-void Weapon::Update(
+
+void Smg::Update(
     const sf::Vector2f& pos,
     const float rotation,
     sf::Vector2f& aimingDirection,
@@ -88,7 +80,7 @@ void Weapon::Update(
     } else if (
         sf::Keyboard::isKeyPressed(sf::Keyboard::R) 
         && (currentAmmoLeft_ != 0)
-        && (currentAmmoInClip_ != clipSize_) ) {
+        && (currentAmmoInClip_ != magazineSize_) ) {
 
         /*
         Reload if:
@@ -106,7 +98,7 @@ void Weapon::Update(
             (*it)->Update(bulletVelocity_, timeSinceLastFrame, fireRange_);
 
             if ((*it)->getHasReachedMaxDistance()) {
-                it = bullets_.erase(it); // empty vector case and resize it
+                it = bullets_.erase(it); // empty vector slot and resize it
             } else {
                 ++it;
             }
@@ -116,7 +108,7 @@ void Weapon::Update(
 
 
 
-void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
+void Smg::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     // weapon 
     window->draw(*shape_);
@@ -128,7 +120,7 @@ void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
 
 
-void Weapon::Shoot(sf::Vector2f& direction) {
+void Smg::Shoot(sf::Vector2f& direction) {
 
     static auto lastShotFired = std::chrono::steady_clock::now();
 
@@ -163,10 +155,10 @@ void Weapon::Shoot(sf::Vector2f& direction) {
 
 
 
-void Weapon::Reload() {
+void Smg::Reload() {
 
     // number of ammo required to refill the clip
-    const uint16_t ammoToReload = clipSize_ - currentAmmoInClip_;
+    const uint16_t ammoToReload = magazineSize_ - currentAmmoInClip_;
 
     if (ammoToReload <= currentAmmoLeft_) {
         // reload to full capacity 

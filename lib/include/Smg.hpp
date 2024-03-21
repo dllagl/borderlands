@@ -1,59 +1,34 @@
 /**
- * @file Weapon.hpp
+ * @file Smg.hpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
- * @brief Central class for game weapons 
- * @date 2024-02-04
+ * @brief class for smg firearm
+ * @date 2024-03-20
  * 
  * @copyright Copyright (c) 2024
  * 
  */
-#ifndef WEAPON_HPP
-#define WEAPON_HPP
+#ifndef SMG_HPP
+#define SMG_HPP
+
+#include "Firearm.hpp"
+
+class Smg : public Firearm {
 
 
-#include <vector>
-#include <chrono>
-
-#include "Bullet.hpp"
-
-class Bullet;
-
-
-class Weapon {
-
-    // body 
-    std::unique_ptr<sf::RectangleShape> shape_; ///< weapon shape (a rectangle at this point)
-    static const float width_, height_;         ///< weapon's x and y dimensions
-    sf::Vector2f offsetOriginFromPlayerCenter_; ///< offset position coordonate from player's body
-
-    // ammunitions
-    uint16_t maxAmmo_;           ///< maximum amount of ammo allowed     
-    uint16_t currentAmmoLeft_;   ///< current total number of ammo left 
-    uint16_t currentAmmoInClip_; ///< current number of ammo left in clip
-    uint16_t clipSize_;          ///< clip's size
-
-    // bullets properties
-    std::vector<std::unique_ptr<Bullet>> bullets_;  ///< vector of the fired bullets
-    float bulletVelocity_;  ///< bullet's speed
-    float fireRate_;        ///< weapon's fire rate (bullet per sec)
-    float fireRange_;       ///< bullet's max distance of flying
-
-    public :
+    public: 
 
         /** @brief Construct a new Weapon object */
-        Weapon() {};
+        Smg() {};
 
         /**
-         * @brief Construct a new Weapon object
+         * @brief Construct a new Smg object
          * 
          * @param pos position of the object 
          */
-        Weapon(const sf::Vector2f& pos);
+        Smg(const sf::Vector2f& pos);
 
-        /** @brief Destroy the Weapon object */
-        virtual ~Weapon();
-
-
+        /** @brief Destroy the Smg object */
+        virtual ~Smg() {};
 
         /**
          * @brief Update weapon's properties
@@ -68,7 +43,7 @@ class Weapon {
             const float rotation,
             sf::Vector2f& aimingDirection,
             const sf::Time& timeSinceLastFrame
-            ); 
+        ); 
 
         /**
          * @brief Render the object
@@ -83,26 +58,26 @@ class Weapon {
         /** @brief Return the total number of ammunitions left for the player */
         const uint16_t getTotalAmmoLeft() const { return currentAmmoLeft_; }
 
-    protected : 
+
+    private: 
 
         /**
          * @brief Initialise weapon's properties
          * 
          * @param pos initial position
          */
-        void InitAttributs(const sf::Vector2f& pos);
+        void InitAttributs(const sf::Vector2f& pos) override;
 
         /**
          * @brief Shoot bullets
          * 
          * @param direction vector of the direction bullets will move towards
          */
-        void Shoot(sf::Vector2f& direction);
+        void Shoot(sf::Vector2f& direction) override;
 
         /** @brief Reload the weapon's clip to full capacity if enough remaining ammo */
-        void Reload();
+        void Reload() override;
 
 };
 
-#endif // WEAPON_HPP
-
+#endif // SMG_HPP

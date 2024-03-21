@@ -52,7 +52,7 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     shape_->setFillColor(sf::Color::Green);
 
     // init weapon
-    smg_ = std::make_unique<Weapon>(shape_->getPosition());
+    smg_ = std::make_unique<Smg>(shape_->getPosition());
 }
 
 
