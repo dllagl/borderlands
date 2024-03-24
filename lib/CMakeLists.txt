@@ -13,6 +13,7 @@ add_library( ${LIBNAME}
     Main_menu.cpp
     Button.cpp
     Smg.cpp
+    Firearm.cpp
 )
 
 # Include dir 

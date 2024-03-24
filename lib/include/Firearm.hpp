@@ -42,12 +42,53 @@ class Firearm : public Item {
         Firearm() {};
         virtual ~Firearm() {};
 
+        /**
+         * @brief Update weapon's properties
+         * 
+         * @param pos position
+         * @param rotation rotation angle
+         * @param aimingDirection eye direction of the player
+         * @param timeSinceLastFrame time since the last window frame 
+         */
+        void Update(
+            const sf::Vector2f& pos,
+            const float rotation,
+            sf::Vector2f& aimingDirection,
+            const sf::Time& timeSinceLastFrame
+        );
+
+        /**
+         * @brief Render the object
+         * 
+         * @param window window to be rendered in
+         */
+        void Render(const std::unique_ptr<sf::RenderWindow>& window) const;
+
+        /** @brief Return current number of ammo in the weapon's magazine */
+        const uint16_t getAmmoInClip() const { return currentAmmoInClip_; }
+
+        /** @brief Return the total number of ammunitions left for the player */
+        const uint16_t getTotalAmmoLeft() const { return currentAmmoLeft_; }
+
 
     protected:
-    
+
+        /**
+         * @brief Initialise weapon's properties
+         * 
+         * @param pos initial position
+         */
         virtual void InitAttributs(const sf::Vector2f& pos) = 0;
-        virtual void Shoot(sf::Vector2f& direction) = 0;
-        virtual void Reload() = 0;
+        
+        /**
+         * @brief Shoot bullets
+         * 
+         * @param direction vector of the direction bullets will move towards
+         */
+        void Shoot(sf::Vector2f& direction);
+
+        /** @brief Reload the weapon's clip to full capacity if enough remaining ammo */
+        void Reload();
 
 };
 
