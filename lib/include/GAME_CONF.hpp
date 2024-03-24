@@ -43,4 +43,24 @@ namespace BUTTON {
 };
 
 
+/** @brief Global keybindings */
+namespace KEY {
+    typedef sf::Keyboard sfk;
+    typedef sf::Mouse sfm;
+
+    // player's movements 
+    namespace MOV {
+        const sfk::Key UP    = sfk::Z;
+        const sfk::Key DOWN  = sfk::S;
+        const sfk::Key LEFT  = sfk::Q;
+        const sfk::Key RIGHT = sfk::D;
+    };
+
+    namespace WEAPON {
+        const sfk::Key RELOAD   = sfk::R;
+        const sfm::Button SHOOT = sfm::Left; 
+    };
+};
+
+
 #endif // DEF_GAME_CONF

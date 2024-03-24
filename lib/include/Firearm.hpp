@@ -12,6 +12,7 @@
 
 #include "Item.hpp"
 #include "Bullet.hpp"
+#include "GAME_CONF.hpp"
 
 class Bullet;
 class Firearm : public Item {

@@ -27,7 +27,7 @@ void Firearm::Update(
     shape_->setRotation(rotation);
 
     // weapon
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && (currentAmmoInClip_ != 0)) {
+    if (sf::Mouse::isButtonPressed(KEY::WEAPON::SHOOT) && (currentAmmoInClip_ != 0)) {
 
         /*
         Shoot if: 
@@ -37,7 +37,7 @@ void Firearm::Update(
         Shoot(aimingDirection);
 
     } else if (
-        sf::Keyboard::isKeyPressed(sf::Keyboard::R) 
+        sf::Keyboard::isKeyPressed(KEY::WEAPON::RELOAD) 
         && (currentAmmoLeft_ != 0)
         && (currentAmmoInClip_ != magazineSize_) ) {
 

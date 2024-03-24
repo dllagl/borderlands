@@ -71,22 +71,22 @@ void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 void Player::Move(const sf::Time& timeSinceLastFrame) {
 
     // move right 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(KEY::MOV::RIGHT)) {
         shape_->move(acc_ * timeSinceLastFrame.asSeconds(), 0.f);
     }
 
     // move left 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+    if (sf::Keyboard::isKeyPressed(KEY::MOV::LEFT)) {
         shape_->move(-acc_ * timeSinceLastFrame.asSeconds(), 0.f);
     }
 
     // move down 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    if (sf::Keyboard::isKeyPressed(KEY::MOV::DOWN)) {
         shape_->move(0.f, acc_ * timeSinceLastFrame.asSeconds());
     }
 
     // move up 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+    if (sf::Keyboard::isKeyPressed(KEY::MOV::UP)) {
         shape_->move(0.f, -acc_ * timeSinceLastFrame.asSeconds());
     }  
 }
