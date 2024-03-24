@@ -15,9 +15,9 @@
 #define PLAYER_HPP
 
 #include "Firearm_smg.hpp"
+#include "Firearm_pistol.hpp"
 
-class Weapon;
-
+class Firearm;
 class Player {
 
     // player properties
@@ -31,7 +31,8 @@ class Player {
     uint16_t maxShield_, currentShield_; ///< maximum and current shield
 
     // weapon properties
-    std::unique_ptr<Firearm_smg> smg_; ///< equiped weapon
+    std::vector<std::unique_ptr<Firearm>> equipedWeapons_;
+    static uint8_t weaponIdx_;
 
     public : 
 
@@ -64,13 +65,13 @@ class Player {
 
 
         /** @brief Return current number of ammo in the weapon's magazine */
-        const uint16_t getAmmoInClip() const { return smg_->getAmmoInClip(); }
+        const uint16_t getAmmoInClip() const { return equipedWeapons_.at(weaponIdx_)->getAmmoInClip();}
 
         /** @brief Return the total number of ammunitions left for the player */
-        const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
+        const uint16_t getTotalAmmoLeft() const { return equipedWeapons_.at(weaponIdx_)->getTotalAmmoLeft();}
 
         /** @brief Return the weapon's name */
-        const std::string getWeaponName() const { return smg_->getName(); }
+        const std::string getWeaponName() const { return equipedWeapons_.at(weaponIdx_)->getName();}
 
         /** @brief Return player's current health */
         const uint16_t getCurrentHealth() const { return currentHealth_; }
@@ -110,6 +111,8 @@ class Player {
          * @param window window to be rendered in
          */
         void Rotate(const std::unique_ptr<sf::RenderWindow>& window);
+
+        void changeSelectedWeapon();
 
 };
 

@@ -13,6 +13,7 @@ add_library( ${LIBNAME}
     Main_menu.cpp
     Button.cpp
     Firearm_smg.cpp
+    Firearm_pistol.cpp
     Firearm.cpp
 )
 

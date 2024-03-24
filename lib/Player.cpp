@@ -19,6 +19,9 @@
 const float Player::width_  = 60.f;
 const float Player::height_ = 40.f;
 
+// inventory
+uint8_t Player::weaponIdx_ = 0; // index of the selected weapon in the inventory
+
 
 
 ////////////////////////////////////
@@ -51,21 +54,27 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     shape_->setPosition(pos);
     shape_->setFillColor(sf::Color::Green);
 
-    // init weapon
-    smg_ = std::make_unique<Firearm_smg>(shape_->getPosition());
+    // init weapons inventory (smg and pistol for testing purposes)
+    equipedWeapons_.push_back(std::make_unique<Firearm_smg>(shape_->getPosition()));
+    equipedWeapons_.push_back(std::make_unique<Firearm_pistol>(shape_->getPosition()));
 }
 
 
 void Player::Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::Time& timeSinceLastFrame) {
     Move(timeSinceLastFrame);
     Rotate(window);
-    smg_->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_, timeSinceLastFrame);
+    changeSelectedWeapon();
+
+    // only update selected weapon
+    equipedWeapons_.at(weaponIdx_)->Update(shape_->getPosition(), shape_->getRotation(), lookingDirection_, timeSinceLastFrame);
 }
 
 
 void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
     window->draw(*shape_);
-    smg_->Render(window);
+
+    // only render selected weapon
+    equipedWeapons_.at(weaponIdx_)->Render(window); 
 }
 
 void Player::Move(const sf::Time& timeSinceLastFrame) {
@@ -98,4 +107,25 @@ void Player::Rotate(const std::unique_ptr<sf::RenderWindow>& window) {
     lookingDirection_.y = mousePos.y - shape_->getPosition().y;
     float angle = atan2(lookingDirection_.y, lookingDirection_.x) * 57.296f;
     shape_->setRotation(angle + 90.f);
+}
+
+
+
+void Player::changeSelectedWeapon() {
+
+    static bool weaponHasbeenChanged = false; // avoid "multiple" key pressing bug
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
+        if (!weaponHasbeenChanged) {
+            weaponIdx_ = (weaponIdx_ < equipedWeapons_.size()-1) ? weaponIdx_+1 : 0;
+        }  
+        weaponHasbeenChanged = true;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)) {
+        if (!weaponHasbeenChanged) {
+            weaponIdx_ = (weaponIdx_ > 0) ? weaponIdx_-1 : equipedWeapons_.size()-1;
+        }
+        weaponHasbeenChanged = true;
+    } else {
+        weaponHasbeenChanged = false;
+    }
 }
