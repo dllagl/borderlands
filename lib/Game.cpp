@@ -70,6 +70,7 @@ void Game::InitHud() {
         mainPlayer_->getCurrentShield(),
         mainPlayer_->getAmmoInClip(),
         mainPlayer_->getTotalAmmoLeft(),
+        mainPlayer_->getWeaponName(),
         mainWindowSize_
         );
 }

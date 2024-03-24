@@ -31,6 +31,7 @@ class Firearm : public Item {
 
         // weapon properties
         std::vector<std::unique_ptr<Bullet>> bullets_; ///< vector of the fired bullets
+        std::string name_;     ///< weapon's name
         float fireRate_;       ///< weapon's fire rate (bullet per sec)
         float fireRange_;      ///< bullet's max distance of flying
         float bulletVelocity_; ///< bullet's speed
@@ -69,6 +70,9 @@ class Firearm : public Item {
 
         /** @brief Return the total number of ammunitions left for the player */
         const uint16_t getTotalAmmoLeft() const { return currentAmmoLeft_; }
+
+        /** @brief Return the weapon's name */
+        const std::string getName() const { return name_; }
 
 
     protected:

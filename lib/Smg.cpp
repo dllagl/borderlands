@@ -29,6 +29,7 @@ void Smg::InitAttributs(const sf::Vector2f& pos) {
     width_ = 15.f;
     height_ = 25.f;
     shape_->setSize(sf::Vector2f(width_, height_));
+    name_ = "Example smg name";
 
     /**
      * The origin of the weapon is set to the geometrical center 

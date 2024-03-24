@@ -69,6 +69,9 @@ class Player {
         /** @brief Return the total number of ammunitions left for the player */
         const uint16_t getTotalAmmoLeft() const { return smg_->getTotalAmmoLeft(); }
 
+        /** @brief Return the weapon's name */
+        const std::string getWeaponName() const { return smg_->getName(); }
+
         /** @brief Return player's current health */
         const uint16_t getCurrentHealth() const { return currentHealth_; }
 

@@ -12,17 +12,17 @@
 
 #include "Hud_health.hpp"
 #include "Hud_shield.hpp"
-#include "Hud_ammo.hpp"
+#include "Hud_firearm.hpp"
 
 class Hud_health;
 class Hud_shield;
-class Hud_ammo;
+class Hud_firearm;
 
 class Hud {
 
     std::unique_ptr<Hud_health> hudHealth_; ///< health display on HUD 
     std::unique_ptr<Hud_shield> hudShield_; ///< shield display on HUD 
-    std::unique_ptr<Hud_ammo> hudAmmo_;     ///< ammo display on HUD
+    std::unique_ptr<Hud_firearm> hudFirearm_;  ///< weapon display on HUD
 
     public:
 
@@ -36,6 +36,7 @@ class Hud {
          * @param playerShield main player's current shield
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param weaponName equiped weapon's name
          * @param windowSize main window's (x,y) dimensions
          */
         Hud(
@@ -43,6 +44,7 @@ class Hud {
             const uint16_t playerShield,
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
+            const std::string weaponName,
             const sf::Vector2f& windowSize
             ); 
 
@@ -83,7 +85,8 @@ class Hud {
          * @param playerHealth main player's current health
          * @param playerShield main player's current shield
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
-         * @param totalAmmoLeft player's total number of available ammo 
+         * @param totalAmmoLeft player's total number of available ammo
+         * @param weaponName equiped weapon's name  
          * @param windowSize main window's (x,y) dimensions
          */
         void InitAttributs(
@@ -91,6 +94,7 @@ class Hud {
             const uint16_t playerShield,
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
+            const std::string weaponName,
             const sf::Vector2f& windowSize
         );
 

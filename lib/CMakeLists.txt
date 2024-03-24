@@ -9,7 +9,7 @@ add_library( ${LIBNAME}
     Hud.cpp
     Hud_health.cpp
     Hud_shield.cpp
-    Hud_ammo.cpp
+    Hud_firearm.cpp
     Main_menu.cpp
     Button.cpp
     Smg.cpp
