@@ -60,6 +60,7 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
 }
 
 
+
 void Player::Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::Time& timeSinceLastFrame) {
     Move(timeSinceLastFrame);
     Rotate(window);
@@ -70,12 +71,15 @@ void Player::Update(const std::unique_ptr<sf::RenderWindow>& window, const sf::T
 }
 
 
+
 void Player::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
     window->draw(*shape_);
 
     // only render selected weapon
     equipedWeapons_.at(weaponIdx_)->Render(window); 
 }
+
+
 
 void Player::Move(const sf::Time& timeSinceLastFrame) {
 
@@ -99,6 +103,8 @@ void Player::Move(const sf::Time& timeSinceLastFrame) {
         shape_->move(0.f, -acc_ * timeSinceLastFrame.asSeconds());
     }  
 }
+
+
 
 void Player::Rotate(const std::unique_ptr<sf::RenderWindow>& window) {
 

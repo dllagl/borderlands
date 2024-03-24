@@ -30,7 +30,7 @@ class Player {
     uint16_t maxHealth_, currentHealth_; ///< maximum and current health
     uint16_t maxShield_, currentShield_; ///< maximum and current shield
 
-    // weapon properties
+    // inventory properties
     std::vector<std::unique_ptr<Firearm>> equipedWeapons_;
     static uint8_t weaponIdx_;
 
@@ -112,6 +112,7 @@ class Player {
          */
         void Rotate(const std::unique_ptr<sf::RenderWindow>& window);
 
+        /** @brief Update player's selected weapon in its inventory*/
         void changeSelectedWeapon();
 
 };
