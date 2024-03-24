@@ -1,5 +1,5 @@
 /**
- * @file Smg.hpp
+ * @file Firearm_smg.hpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief class for smg firearm
  * @date 2024-03-20
@@ -7,28 +7,28 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#ifndef SMG_HPP
-#define SMG_HPP
+#ifndef DEF_FIREARM_SMG
+#define DEF_FIREARM_SMG
 
 #include "Firearm.hpp"
 
-class Smg : public Firearm {
+class Firearm_smg : public Firearm {
 
 
     public: 
 
         /** @brief Construct a new Weapon object */
-        Smg() {};
+        Firearm_smg() {};
 
         /**
-         * @brief Construct a new Smg object
+         * @brief Construct a new Firearm_smg object
          * 
          * @param pos position of the object 
          */
-        Smg(const sf::Vector2f& pos);
+        Firearm_smg(const sf::Vector2f& pos);
 
-        /** @brief Destroy the Smg object */
-        virtual ~Smg() {};
+        /** @brief Destroy the Firearm_smg object */
+        virtual ~Firearm_smg() {};
 
 
     private: 
@@ -42,4 +42,4 @@ class Smg : public Firearm {
 
 };
 
-#endif // SMG_HPP
+#endif // DEF_FIREARM_SMG

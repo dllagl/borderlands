@@ -12,7 +12,7 @@ add_library( ${LIBNAME}
     Hud_firearm.cpp
     Main_menu.cpp
     Button.cpp
-    Smg.cpp
+    Firearm_smg.cpp
     Firearm.cpp
 )
 

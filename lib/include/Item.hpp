@@ -15,6 +15,8 @@
 #include <chrono>
 #include <vector>
 
+#include "GAME_CONF.hpp"
+
 class Item {
 
     public: 
