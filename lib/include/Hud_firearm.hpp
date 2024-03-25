@@ -34,13 +34,13 @@ class Hud_firearm {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
-         * @param weaponName equiped weapon's name
+         * @param equipedWeaponName equiped weapon's name
          * @param windowSize main window's (x,y) dimensions
          */
         Hud_firearm(
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
-            const std::string& name,
+            const std::string& equipedWeaponName,
             const sf::Vector2f& windowSize
             );
 
@@ -49,8 +49,9 @@ class Hud_firearm {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param equipedWeaponName equiped weapon's name
          */
-        void Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft);
+        void Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft, const std::string& equipedWeaponName);
 
         /**
          * @brief Render HUD's ammo component on game window

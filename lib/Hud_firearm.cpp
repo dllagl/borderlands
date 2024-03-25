@@ -19,9 +19,9 @@
 Hud_firearm::Hud_firearm(
     const uint16_t ammoLeftInClip,
     const uint16_t totalAmmoLeft,
-    const std::string& name,
+    const std::string& equipedWeaponName,
     const sf::Vector2f& windowSize) 
-    : displayedAmmoInClip_(ammoLeftInClip), displayedTotalAmmo_(totalAmmoLeft), weaponName_(name){
+    : displayedAmmoInClip_(ammoLeftInClip), displayedTotalAmmo_(totalAmmoLeft), weaponName_(equipedWeaponName){
         
     InitAttributs(windowSize);
 }
@@ -66,7 +66,7 @@ void Hud_firearm::InitAttributs(const sf::Vector2f& windowSize) {
 
 
 
-void Hud_firearm::Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft) {
+void Hud_firearm::Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmoLeft, const std::string& equipedWeaponName) {
 
     // does not update ammo display if it has not changed since last frame
     if ((ammoLeftInClip != displayedAmmoInClip_) || (totalAmmoLeft != displayedTotalAmmo_)) {
@@ -83,6 +83,13 @@ void Hud_firearm::Update(const uint16_t ammoLeftInClip, const uint16_t totalAmmo
 
         displayedAmmoInClip_ = ammoLeftInClip;
         displayedTotalAmmo_ = totalAmmoLeft;
+    }
+
+    // does not update weapon name unless player has switched weapons
+    if (equipedWeaponName != weaponName_) {
+
+        textName_->setString(equipedWeaponName);
+        weaponName_ = equipedWeaponName;
     }
 }
 

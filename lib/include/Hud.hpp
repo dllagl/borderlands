@@ -44,7 +44,7 @@ class Hud {
             const uint16_t playerShield,
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
-            const std::string weaponName,
+            const std::string equipedWeaponName,
             const sf::Vector2f& windowSize
             ); 
 
@@ -64,6 +64,7 @@ class Hud {
         void Update(
             const uint16_t ammoLeftInClip,
             const uint16_t totalAmmoLeft,
+            const std::string& equipedWeaponName,
             const uint16_t playerHealth,
             const uint16_t playerMaxHealth,
             const uint16_t playerShield,
