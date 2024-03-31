@@ -32,7 +32,7 @@ Button::Button(
 void Button::InitAttributs(const sf::Vector2f& pos, const sf::Vector2f& size, const char* text) {
 
     // button text font 
-    font_.loadFromFile("../lib/fonts/ammo-pixel.ttf");
+    font_.loadFromFile("../refs/fonts/ammo-pixel.ttf");
 
     // button shape
     shape_ = std::make_unique<sf::RectangleShape>();

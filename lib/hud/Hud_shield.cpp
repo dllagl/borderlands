@@ -44,7 +44,7 @@ void Hud_shield::InitAttributs(const sf::Vector2f& windowSize) {
 
     // font
     font_ = std::make_unique<sf::Font>();
-    font_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
+    font_->loadFromFile("../refs/fonts/ammo-pixel.ttf");
 
     // text (positioned relatively to the background shield rectangle)
     text_ = std::make_unique<sf::Text>();
