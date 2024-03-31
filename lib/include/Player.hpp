@@ -14,8 +14,8 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include "Firearm_smg.hpp"
-#include "Firearm_pistol.hpp"
+#include "items/firearms/Smg.hpp"
+#include "items/firearms/Pistol.hpp"
 
 class Firearm;
 class Player {

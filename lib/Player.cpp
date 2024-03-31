@@ -55,8 +55,8 @@ void Player::InitAttributs(const sf::Vector2f& pos) {
     shape_->setFillColor(sf::Color::Green);
 
     // init weapons inventory (smg and pistol for testing purposes)
-    equipedWeapons_.push_back(std::make_unique<Firearm_smg>(shape_->getPosition()));
-    equipedWeapons_.push_back(std::make_unique<Firearm_pistol>(shape_->getPosition()));
+    equipedWeapons_.push_back(std::make_unique<Smg>(shape_->getPosition()));
+    equipedWeapons_.push_back(std::make_unique<Pistol>(shape_->getPosition()));
 }
 
 

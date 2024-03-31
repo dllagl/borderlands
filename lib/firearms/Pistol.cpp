@@ -1,5 +1,5 @@
 /**
- * @file Firearm_pistol.cpp
+ * @file Pistol.cpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief 
  * @date 2024-03-20
@@ -8,13 +8,13 @@
  * 
  */
 
-#include "Firearm_pistol.hpp"
+#include "items/firearms/Pistol.hpp"
 
 ////////////////////////////////////
 // ctors / dtor 
 ////////////////////////////////////
 
-Firearm_pistol::Firearm_pistol(const sf::Vector2f& pos) {
+Pistol::Pistol(const sf::Vector2f& pos) {
     InitAttributs(pos);
 }
 
@@ -22,7 +22,7 @@ Firearm_pistol::Firearm_pistol(const sf::Vector2f& pos) {
 // methods
 ////////////////////////////////////
 
-void Firearm_pistol::InitAttributs(const sf::Vector2f& pos) {
+void Pistol::InitAttributs(const sf::Vector2f& pos) {
 
     // body 
     shape_ = std::make_unique<sf::RectangleShape>();

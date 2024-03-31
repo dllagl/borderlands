@@ -1,5 +1,5 @@
 /**
- * @file Hud_health.cpp
+ * @file Hud_shield.cpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief 
  * @date 2024-02-28
@@ -8,7 +8,7 @@
  * 
  */
 
-#include "Hud_health.hpp"
+#include "hud/Hud_shield.hpp"
 
 
 
@@ -16,8 +16,8 @@
 // ctors / dtor 
 ////////////////////////////////////
 
-Hud_health::Hud_health(const uint16_t playerHealth, const sf::Vector2f& windowSize) 
-    : displayedHealth_(playerHealth) {
+Hud_shield::Hud_shield(const uint16_t playerShield, const sf::Vector2f& windowSize) 
+    : displayedShield_(playerShield) {
     InitAttributs(windowSize);
 }
 
@@ -26,29 +26,29 @@ Hud_health::Hud_health(const uint16_t playerHealth, const sf::Vector2f& windowSi
 // methods
 ////////////////////////////////////
 
-void Hud_health::InitAttributs(const sf::Vector2f& windowSize) {
+void Hud_shield::InitAttributs(const sf::Vector2f& windowSize) {
 
-    // background health rectangle (fixed size, only the outline is colored)
+    // background shield rectangle (fixed size, only the outline is colored)
     bgRect_ = sf::RectangleShape(sf::Vector2f(180.f,20.f));
     bgRect_.setOrigin(bgRect_.getSize()/2.f);
-    bgRect_.setPosition(0.09f * windowSize.x, 0.9f * windowSize.y);
+    bgRect_.setPosition(0.09f * windowSize.x, 0.94f * windowSize.y);
     bgRect_.setFillColor(sf::Color::Transparent);
     bgRect_.setOutlineColor(sf::Color::White);
     bgRect_.setOutlineThickness(2.0f);
 
-    // actual health rectangle (its size evolves with player's health)
+    // actual shield rectangle (its size evolves with player's shield)
     rect_ = std::make_unique<sf::RectangleShape>(bgRect_.getSize());
     rect_->setOrigin(rect_->getSize()/2.f);
     rect_->setPosition(bgRect_.getPosition());
-    rect_->setFillColor(sf::Color::Red);
+    rect_->setFillColor(sf::Color::Blue);
 
     // font
     font_ = std::make_unique<sf::Font>();
-    font_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
+    font_->loadFromFile("../refs/fonts/ammo-pixel.ttf");
 
-    // text (positioned relatively to the background health rectangle)
+    // text (positioned relatively to the background shield rectangle)
     text_ = std::make_unique<sf::Text>();
-    text_->setString(std::to_string(displayedHealth_));
+    text_->setString(std::to_string(displayedShield_));
     text_->setFont(*font_);
     text_->setCharacterSize(50);
     const sf::FloatRect textBounds = text_->getGlobalBounds();
@@ -56,29 +56,29 @@ void Hud_health::InitAttributs(const sf::Vector2f& windowSize) {
             sf::Vector2f(textBounds.left + textBounds.width/2.f, textBounds.top + textBounds.height/2.f)
         );
     text_->setPosition(bgRect_.getPosition() + sf::Vector2f(140.f,0.f));
-    text_->setFillColor(sf::Color::Red);
+    text_->setFillColor(sf::Color::Blue);
 }
 
 
 
-void Hud_health::Update(const uint16_t playerHealth, const uint16_t playerMaxHealth) {
+void Hud_shield::Update(const uint16_t playerShield, const uint16_t playerMaxShield) {
 
-    // does not update health display if it has not changed since last frame
-    if (playerHealth != displayedHealth_) {
+    // does not update shield display if it has not changed since last frame
+    if (playerShield != displayedShield_) {
 
         // update text 
-        text_->setString(std::to_string(playerHealth));
-        displayedHealth_ = playerHealth;
+        text_->setString(std::to_string(playerShield));
+        displayedShield_ = playerShield;
 
         // update rectangle
-        float newSizeOfRect = ((float)playerHealth / playerMaxHealth) * bgRect_.getSize().x;
+        float newSizeOfRect = ((float)playerShield / playerMaxShield) * bgRect_.getSize().x;
         rect_->setSize(sf::Vector2f(newSizeOfRect, rect_->getSize().y));
     }
 }
 
 
 
-void Hud_health::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
+void Hud_shield::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     window->draw(*text_);
     window->draw(*rect_);

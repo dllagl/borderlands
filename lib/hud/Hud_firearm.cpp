@@ -8,7 +8,7 @@
  * 
  */
 
-#include "Hud_firearm.hpp"
+#include "hud/Hud_firearm.hpp"
 
 
 
@@ -35,7 +35,7 @@ void Hud_firearm::InitAttributs(const sf::Vector2f& windowSize) {
 
     // font
     font_ = std::make_unique<sf::Font>();
-    font_->loadFromFile("../lib/fonts/ammo-pixel.ttf");
+    font_->loadFromFile("../refs/fonts/ammo-pixel.ttf");
 
     // text for ammunitions 
     textAmmo_ = std::make_unique<sf::Text>();

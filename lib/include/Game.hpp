@@ -13,8 +13,8 @@
 #define GAME_HPP
 
 #include "Player.hpp"
-#include "Hud.hpp"
-#include "Main_menu.hpp"
+#include "hud/Hud.hpp"
+#include "main_menu/Main_menu.hpp"
 
 class player;
 class Hud;
