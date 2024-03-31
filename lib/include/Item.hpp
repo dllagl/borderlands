@@ -18,6 +18,9 @@
 
 class Item {
 
+    protected:
+        std::string name_;     ///< item's name
+        
     public: 
 
         Item() {};

@@ -65,13 +65,13 @@ class Player {
 
 
         /** @brief Return current number of ammo in the weapon's magazine */
-        const uint16_t getAmmoInClip() const { return equipedWeapons_.at(weaponIdx_)->getAmmoInClip();}
+        const uint16_t getAmmoInClip() const { return equipedWeapons_.at(weaponIdx_)->getAmmoInClip(); }
 
         /** @brief Return the total number of ammunitions left for the player */
-        const uint16_t getTotalAmmoLeft() const { return equipedWeapons_.at(weaponIdx_)->getTotalAmmoLeft();}
+        const uint16_t getTotalAmmoLeft() const { return equipedWeapons_.at(weaponIdx_)->getTotalAmmoLeft(); }
 
         /** @brief Return the weapon's name */
-        const std::string getWeaponName() const { return equipedWeapons_.at(weaponIdx_)->getName();}
+        const std::string getWeaponName() const { return equipedWeapons_.at(weaponIdx_)->getName(); }
 
         /** @brief Return player's current health */
         const uint16_t getCurrentHealth() const { return currentHealth_; }

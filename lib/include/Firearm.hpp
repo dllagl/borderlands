@@ -31,7 +31,6 @@ class Firearm : public Item {
 
         // weapon properties
         std::vector<std::unique_ptr<Bullet>> bullets_; ///< vector of the fired bullets
-        std::string name_;     ///< weapon's name
         float fireRate_;       ///< weapon's fire rate (bullet per sec)
         float fireRange_;      ///< bullet's max distance of flying
         float bulletVelocity_; ///< bullet's speed

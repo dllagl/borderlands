@@ -56,6 +56,7 @@ class Hud {
          * 
          * @param ammoLeftInClip number of ammo left in the weapon's magazine 
          * @param totalAmmoLeft player's total number of available ammo 
+         * @param equipedWeaponName player's weapon currently in hand
          * @param playerHealth player's current health
          * @param playerMaxHealth player's maximum health
          * @param playerShield player's current shield
