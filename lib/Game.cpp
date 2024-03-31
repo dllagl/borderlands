@@ -70,6 +70,7 @@ void Game::InitHud() {
         mainPlayer_->getCurrentShield(),
         mainPlayer_->getAmmoInClip(),
         mainPlayer_->getTotalAmmoLeft(),
+        mainPlayer_->getWeaponName(),
         mainWindowSize_
         );
 }
@@ -109,6 +110,7 @@ void Game::Update(const sf::Time& timeSinceLastFrame) {
         hud_->Update(
             mainPlayer_->getAmmoInClip(),
             mainPlayer_->getTotalAmmoLeft(),
+            mainPlayer_->getWeaponName(),
             mainPlayer_->getCurrentHealth(),
             mainPlayer_->getMaxHealth(),
             mainPlayer_->getCurrentShield(),

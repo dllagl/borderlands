@@ -20,9 +20,10 @@ Hud::Hud(
     const uint16_t playerShield,
     const uint16_t ammoLeftInClip,
     const uint16_t totalAmmoLeft,
+    const std::string equipedWeaponName,
     const sf::Vector2f& windowSize) {
 
-    InitAttributs(playerHealth, playerShield, ammoLeftInClip, totalAmmoLeft, windowSize);
+    InitAttributs(playerHealth, playerShield, ammoLeftInClip, totalAmmoLeft, equipedWeaponName, windowSize);
 }
 
 
@@ -36,11 +37,12 @@ void Hud::InitAttributs(
     const uint16_t playerShield,
     const uint16_t ammoLeftInClip,
     const uint16_t totalAmmoLeft,
+    const std::string equipedWeaponName,
     const sf::Vector2f& windowSize) {
 
-    hudAmmo_   = std::make_unique<Hud_ammo>(ammoLeftInClip, totalAmmoLeft, windowSize);
-    hudHealth_ = std::make_unique<Hud_health>(playerHealth, windowSize);
-    hudShield_ = std::make_unique<Hud_shield>(playerShield,windowSize);
+    hudFirearm_  = std::make_unique<Hud_firearm>(ammoLeftInClip, totalAmmoLeft, equipedWeaponName, windowSize);
+    hudHealth_   = std::make_unique<Hud_health>(playerHealth, windowSize);
+    hudShield_   = std::make_unique<Hud_shield>(playerShield,windowSize);
 
 }
 
@@ -49,12 +51,13 @@ void Hud::InitAttributs(
 void Hud::Update(
     const uint16_t ammoLeftInClip,
     const uint16_t totalAmmoLeft,
+    const std::string& equipedWeaponName,
     const uint16_t playerHealth,
     const uint16_t playerMaxHealth,
     const uint16_t playerShield,
     const uint16_t playerMaxShield) {
         
-    hudAmmo_->Update(ammoLeftInClip, totalAmmoLeft);
+    hudFirearm_->Update(ammoLeftInClip, totalAmmoLeft, equipedWeaponName);
     hudHealth_->Update(playerHealth, playerMaxHealth);
     hudShield_->Update(playerShield, playerMaxShield);
         
@@ -64,7 +67,7 @@ void Hud::Update(
 
 void Hud::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
-    hudAmmo_->Render(window);
+    hudFirearm_->Render(window);
     hudHealth_->Render(window);
     hudShield_->Render(window);
 

@@ -1,70 +1,21 @@
 /**
- * @file Weapon.cpp
+ * @file Firearm.cpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief 
- * @date 2024-02-04
+ * @date 2024-03-21
  * 
  * @copyright Copyright (c) 2024
  * 
  */
 
-#include "Weapon.hpp"
-
-////////////////////////////////////
-// static members 
-////////////////////////////////////
-
-const float Weapon::width_  = 15.f;
-const float Weapon::height_ = 25.f;
-
-
-////////////////////////////////////
-// ctors / dtor 
-////////////////////////////////////
-
-Weapon::Weapon(const sf::Vector2f& pos) {
-    InitAttributs(pos);
-}
-
-Weapon::~Weapon() {
-}
-
-
+#include "Firearm.hpp"
 
 ////////////////////////////////////
 // methods
 ////////////////////////////////////
 
-void Weapon::InitAttributs(const sf::Vector2f& pos) {
 
-    // body
-    shape_ = std::make_unique<sf::RectangleShape>();
-    shape_->setSize(sf::Vector2f(width_,height_));
-
-    /**
-     * The origin of the weapon is set to the geometrical center 
-     * of the player in order to rotate around its axis.
-     */
-    offsetOriginFromPlayerCenter_ = sf::Vector2f(-8.f, 30.f);
-    shape_->setOrigin(offsetOriginFromPlayerCenter_);
-    shape_->setPosition(pos);
-    shape_->setFillColor(sf::Color::Red);
-
-    // ammunitions
-    maxAmmo_ = 240;
-    clipSize_ = 21;
-    currentAmmoInClip_ = clipSize_;
-    currentAmmoLeft_ = maxAmmo_ - currentAmmoInClip_;
-
-    // bullets
-    fireRate_ = 10.f;
-    fireRange_ = 200.f;
-    bulletVelocity_ = 500.f;
-}
-
-
-
-void Weapon::Update(
+void Firearm::Update(
     const sf::Vector2f& pos,
     const float rotation,
     sf::Vector2f& aimingDirection,
@@ -76,7 +27,7 @@ void Weapon::Update(
     shape_->setRotation(rotation);
 
     // weapon
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && (currentAmmoInClip_ != 0)) {
+    if (sf::Mouse::isButtonPressed(KEY::WEAPON::SHOOT) && (currentAmmoInClip_ != 0)) {
 
         /*
         Shoot if: 
@@ -86,9 +37,9 @@ void Weapon::Update(
         Shoot(aimingDirection);
 
     } else if (
-        sf::Keyboard::isKeyPressed(sf::Keyboard::R) 
+        sf::Keyboard::isKeyPressed(KEY::WEAPON::RELOAD) 
         && (currentAmmoLeft_ != 0)
-        && (currentAmmoInClip_ != clipSize_) ) {
+        && (currentAmmoInClip_ != magazineSize_) ) {
 
         /*
         Reload if:
@@ -106,7 +57,7 @@ void Weapon::Update(
             (*it)->Update(bulletVelocity_, timeSinceLastFrame, fireRange_);
 
             if ((*it)->getHasReachedMaxDistance()) {
-                it = bullets_.erase(it); // empty vector case and resize it
+                it = bullets_.erase(it); // empty vector slot and resize it
             } else {
                 ++it;
             }
@@ -116,7 +67,8 @@ void Weapon::Update(
 
 
 
-void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
+
+void Firearm::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
     // weapon 
     window->draw(*shape_);
@@ -128,7 +80,7 @@ void Weapon::Render(const std::unique_ptr<sf::RenderWindow>& window) const {
 
 
 
-void Weapon::Shoot(sf::Vector2f& direction) {
+void Firearm::Shoot(sf::Vector2f& direction) {
 
     static auto lastShotFired = std::chrono::steady_clock::now();
 
@@ -163,10 +115,10 @@ void Weapon::Shoot(sf::Vector2f& direction) {
 
 
 
-void Weapon::Reload() {
+void Firearm::Reload() {
 
     // number of ammo required to refill the clip
-    const uint16_t ammoToReload = clipSize_ - currentAmmoInClip_;
+    const uint16_t ammoToReload = magazineSize_ - currentAmmoInClip_;
 
     if (ammoToReload <= currentAmmoLeft_) {
         // reload to full capacity 
