@@ -11,7 +11,7 @@
 #define FIREARM_HPP
 
 #include "items/Item.hpp"
-#include "Bullet.hpp"
+#include "items/firearms/Bullet.hpp"
 
 class Bullet;
 class Firearm : public Item {

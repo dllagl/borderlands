@@ -8,7 +8,7 @@
  * 
  */
 
-#include "Bullet.hpp"
+#include "items/firearms/Bullet.hpp"
 
 ////////////////////////////////////
 // ctors / dtor 
