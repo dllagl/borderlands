@@ -8,7 +8,7 @@
  * 
  */
 
-#include "Firearm_smg.hpp"
+#include "items/firearms/Firearm_smg.hpp"
 
 ////////////////////////////////////
 // ctors / dtor 

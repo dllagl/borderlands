@@ -8,7 +8,7 @@
  * 
  */
 
-#include "Firearm.hpp"
+#include "items/firearms/Firearm.hpp"
 
 ////////////////////////////////////
 // methods

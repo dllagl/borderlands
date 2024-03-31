@@ -10,7 +10,7 @@
 #ifndef DEF_FIREARM_PISTOL
 #define DEF_FIREARM_PISTOL
 
-#include "Firearm.hpp"
+#include "items/firearms/Firearm.hpp"
 
 class Firearm_pistol : public Firearm {
 

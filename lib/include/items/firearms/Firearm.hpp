@@ -10,7 +10,7 @@
 #ifndef FIREARM_HPP
 #define FIREARM_HPP
 
-#include "Item.hpp"
+#include "items/Item.hpp"
 #include "Bullet.hpp"
 
 class Bullet;
