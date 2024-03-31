@@ -1,5 +1,5 @@
 /**
- * @file Firearm_smg.cpp
+ * @file Smg.cpp
  * @author Anthony DALL'AGNOL (dllagl@gmx.com)
  * @brief 
  * @date 2024-03-20
@@ -8,13 +8,13 @@
  * 
  */
 
-#include "items/firearms/Firearm_smg.hpp"
+#include "items/firearms/Smg.hpp"
 
 ////////////////////////////////////
 // ctors / dtor 
 ////////////////////////////////////
 
-Firearm_smg::Firearm_smg(const sf::Vector2f& pos) {
+Smg::Smg(const sf::Vector2f& pos) {
     InitAttributs(pos);
 }
 
@@ -22,7 +22,7 @@ Firearm_smg::Firearm_smg(const sf::Vector2f& pos) {
 // methods
 ////////////////////////////////////
 
-void Firearm_smg::InitAttributs(const sf::Vector2f& pos) {
+void Smg::InitAttributs(const sf::Vector2f& pos) {
 
     // body 
     shape_ = std::make_unique<sf::RectangleShape>();

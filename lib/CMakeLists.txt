@@ -5,12 +5,8 @@ set(LIBNAME "game")
 add_library( ${LIBNAME}
     Game.cpp
     Player.cpp
-    Bullet.cpp
     Main_menu.cpp
     Button.cpp
-    Firearm_smg.cpp
-    Firearm_pistol.cpp
-    Firearm.cpp
 )
 
 # Include dir 
@@ -31,6 +27,10 @@ $<$<CONFIG:DEBUG>:-g> # Enable debug symbols
 # Add the hud library
 add_subdirectory(hud)
 target_link_libraries(${LIBNAME} hud)
+
+# Add the hud library
+add_subdirectory(firearms)
+target_link_libraries(${LIBNAME} firearms)
 
 # Link options
 target_link_libraries( ${LIBNAME} sfml-graphics sfml-window sfml-system )
