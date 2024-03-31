@@ -14,7 +14,7 @@
 
 #include "Player.hpp"
 #include "hud/Hud.hpp"
-#include "Main_menu.hpp"
+#include "main_menu/Main_menu.hpp"
 
 class player;
 class Hud;

@@ -832,7 +832,11 @@ WARN_LOGFILE           =
 INPUT   = src \
           lib \
           lib/hud \
+          lib/firearms \
+          lib/main_menu \
           lib/include \
+          lib/include/hud \
+          lib/include/main_menu \
           lib/include/hud \
           lib/include/items \
           lib/include/items/firearms
