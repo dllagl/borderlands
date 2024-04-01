@@ -34,6 +34,10 @@ target_link_libraries(${LIBNAME} firearms)
 add_subdirectory(main_menu)
 target_link_libraries(${LIBNAME} main_menu)
 
+# Add the utilities library
+add_subdirectory(utilities)
+target_link_libraries(${LIBNAME} utilities)
+
 # Link options
 target_link_libraries( ${LIBNAME} sfml-graphics sfml-window sfml-system )
 

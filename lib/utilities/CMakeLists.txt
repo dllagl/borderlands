@@ -1,8 +1,8 @@
-set(LIBNAME "main_menu")
+set(LIBNAME "utilities")
 
-# add src files to main_menu library 
+# add src files to utilities library 
 add_library( ${LIBNAME}
-    Main_menu.cpp
+    Button.cpp
 )
 
 # Include dir for headers
