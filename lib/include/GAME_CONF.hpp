@@ -16,29 +16,29 @@
 /** @brief Constants related to pause menu buttons */
 namespace BUTTON {
     namespace THICKNESS {
-        constexpr float DEFAULT = 0.f;
-        constexpr float HOVERED = 5.f;
+        extern const float DEFAULT;
+        extern const float HOVERED;
     };
 
     namespace COLOR {
-        const sf::Color FILL    = sf::Color::Green;
-        const sf::Color OUTLINE = sf::Color::White;
+        extern const sf::Color FILL;
+        extern const sf::Color OUTLINE;
     };
 
     namespace TEXT {
-        const sf::Color COLOR   = sf::Color::White;
-        constexpr int CHAR_SIZE = 50; 
+        extern const sf::Color COLOR;
+        extern const int CHAR_SIZE; 
     };
 
     namespace DIM {
-        constexpr float WIDTH   = 130.f;
-        constexpr float HEIGHT  = 70.f;
-        const sf::Vector2f SIZE = sf::Vector2f(WIDTH, HEIGHT);
+        extern const float WIDTH; 
+        extern const float HEIGHT;
+        extern const sf::Vector2f SIZE;
     };
 
     namespace NAME {
-        const char* const QUIT   = "LEAVE";
-        const char* const RESUME = "RESUME"; 
+        extern const char* const QUIT;
+        extern const char* const RESUME; 
     };
 };
 
@@ -50,15 +50,15 @@ namespace KEY {
 
     // player's movements 
     namespace MOV {
-        const sfk::Key UP    = sfk::Z;
-        const sfk::Key DOWN  = sfk::S;
-        const sfk::Key LEFT  = sfk::Q;
-        const sfk::Key RIGHT = sfk::D;
+        extern const sfk::Key UP;
+        extern const sfk::Key DOWN;
+        extern const sfk::Key LEFT;
+        extern const sfk::Key RIGHT;
     };
 
     namespace WEAPON {
-        const sfk::Key RELOAD   = sfk::R;
-        const sfm::Button SHOOT = sfm::Left; 
+        extern const sfk::Key RELOAD;
+        extern const sfm::Button SHOOT; 
     };
 };
 

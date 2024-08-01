@@ -3,6 +3,7 @@ set(LIBNAME "utilities")
 # add src files to utilities library 
 add_library( ${LIBNAME}
     Button.cpp
+    GAME_CONF.cpp
 )
 
 # Include dir for headers
